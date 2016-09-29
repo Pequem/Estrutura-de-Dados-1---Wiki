@@ -159,7 +159,6 @@
     <ClInclude Include="Editor.h" />
     <ClInclude Include="Link.h" />
     <ClInclude Include="Pagina.h" />
-    <ClInclude Include="wiked.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
