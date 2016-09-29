@@ -3,7 +3,7 @@
 #include "Pagina.h"
 #include <stdio.h>
 #include <string>
-
+//
 struct contribuicao
 {
 	char *nomeContribuicao;
