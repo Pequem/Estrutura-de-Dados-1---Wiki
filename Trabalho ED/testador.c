@@ -5,6 +5,7 @@
 #include "Editor.h"
 #include "Link.h"
 #include "Pagina.h"
+#include "Definicoes.h"
 
 int main(int argc, char *argv[])
 {
@@ -25,6 +26,7 @@ int main(int argc, char *argv[])
 	ListaPaginas* listaPaginas = InicializaListaPaginas();
 	ListaEditores* listaEditores = InicializaListaEditores();
 	ListaContribuicoes* listaContribuicoes = InicializaListaContribuicoes();
+	ListaLinks *listaLinksd = inicializaListaLinks();
 
 	char funcao[20], nomePagina[20], nomeArquivo[20], nomeEditor[20], nomeContribuicao[20];
 
@@ -46,7 +48,7 @@ int main(int argc, char *argv[])
 			{
 				//fscanf(file, "%s", nomePagina);
 				scanf("%s", nomePagina);
-				listaPaginas = RetiraPagina(nomePagina, listaPaginas);
+				listaPaginas = RetiraPagina(nomePagina, listaPaginas, listaLinksd, listaContribuicoes);
 			}
 			else
 

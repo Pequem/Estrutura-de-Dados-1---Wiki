@@ -1,7 +1,4 @@
-#include "Pagina.h"
-
-typedef struct link Link;
-typedef struct listaLinks ListaLinks;
+#include "Definicoes.h"
 
 ListaLinks inicializaListaLinks();
 
@@ -9,4 +6,4 @@ void inserirLink(ListaLinks *lista, Pagina *de, Pagina *para);
 
 void removerLink(ListaLinks *lista, Link *l);
 
-void retiraLinksPorPagina(Pagina *pagina, ListaLinks *listaLinks);
+void RetiraLinksPorPagina(Pagina *pagina, ListaLinks *listaLinks);

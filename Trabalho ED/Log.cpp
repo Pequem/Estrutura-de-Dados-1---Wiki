@@ -15,4 +15,5 @@ int printLog(char * msg, char *msg2, char *msg3)
 	fprintf(log, "%s %s %s\n", msg,msg2,msg3);
 
 	return 1;
+	fclose(log);
 }

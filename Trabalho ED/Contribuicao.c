@@ -63,7 +63,7 @@ void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuic
 		return;
 	}
 	if (pagina == NULL) {
-		printf("ERRO: PAGINA NAO EXISTE!\N");
+		printf("ERRO: PAGINA NAO EXISTE!\n");
 		return;
 	}
 

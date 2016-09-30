@@ -1,14 +1,6 @@
+#include "Definicoes.h"
 
 
-typedef struct editor Editor;
-
-/* ESTRUTURA LISTA DE EDITORES (TIPO OPACO)
-* Campos da celula da lista:
-* - Prox (struct listaEditores*)
-* - nomeEditor (char*)
-* - contribuicoes (listaContribuicoes*) - lista de contribuicoes que o editor fez
-*/
-typedef struct listaEditores ListaEditores;
 
 /* CRIA UMA NOVA LISTA DE EDITORES
 * Inputs: Nenhum

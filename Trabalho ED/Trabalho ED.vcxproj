@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Contribuicao.c" />
+    <ClCompile Include="Definicoes.h" />
     <ClCompile Include="Editor.c" />
     <ClCompile Include="Link.c" />
     <ClCompile Include="Log.cpp" />

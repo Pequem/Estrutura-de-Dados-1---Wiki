@@ -1,16 +1,4 @@
-
-#include "Editor.h";
-#include "Pagina.h"
-
-typedef struct contribuicao Contribuicao;
-
-/* ESTRUTURA LISTA DE CONTRIBUICOES (TIPO OPACO)
-* Campos da celula da lista:
-* - Prox (struct listaContribuicoes*)
-* - nomeContribuicao (char*)
-* - pagina (Pagina*) - A contribuicao foi feita a esta pagina
-*/
-typedef struct listaContribuicoes ListaContribuicoes;
+#include "Definicoes.h"
 
 /* CRIA UMA NOVA LISTA DE CONTRIBUICOES
 * Inputs: Nenhum

@@ -1,15 +1,5 @@
+#include "Definicoes.h"
 
-
-/* ESTRUTURA LISTA DE PAGINAS (TIPO OPACO)
-* Campos da celula da lista:
-* - Prox (struct listaPaginas*)
-* - nomePagina (char*)
-* - nomeArquivo (char*)
-*/
-typedef struct pagina Pagina;
-
-
-typedef struct listaPaginas ListaPaginas;
 
 /* CRIA UMA NOVA LISTA DE PAGINAS
 * Inputs: Nenhum
