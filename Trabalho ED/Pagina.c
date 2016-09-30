@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string>
 #include "Log.h"
+#include "Link.h"
+#include "Contribuicao.h"
 
 struct pagina
 {
@@ -16,16 +18,16 @@ struct listaPaginas
 	Pagina *Primeiro;
 };
 
-ListaContribuicoes* InicializaListaPaginas()
+ListaPaginas* InicializaListaPaginas()
 {
-	ListaContribuicoes *lista = (ListaContribuicoes*)malloc(sizeof(ListaContribuicoes));
+	ListaPaginas *lista = (ListaPaginas*)malloc(sizeof(ListaPaginas));
 
 	lista->Primeiro = NULL;
 
 	return lista;
 }
 
-void ImprimePaginas(ListaContribuicoes* lista)
+void ImprimePaginas(ListaPaginas* lista)
 {
 	printf("ImprimePaginas\n");
 
@@ -46,7 +48,7 @@ void ImprimePaginas(ListaContribuicoes* lista)
 	return;
 }
 
-Pagina * recuperaPaginaPorNome(ListaContribuicoes * listaPaginas, char * nome)
+Pagina * recuperaPaginaPorNome(ListaPaginas * listaPaginas, char * nome)
 {
 	Pagina *aux;
 
@@ -70,7 +72,7 @@ Pagina * recuperaPaginaPorNome(ListaContribuicoes * listaPaginas, char * nome)
 	return aux;
 }
 
-int checkExistencia(char * nomePagina, ListaContribuicoes * listaPaginas)
+int checkExistencia(char * nomePagina, ListaPaginas * listaPaginas)
 {
 	Pagina *aux;
 	if (strcmp(listaPaginas->Primeiro->nomePagina, nomePagina)) {
@@ -85,7 +87,7 @@ int checkExistencia(char * nomePagina, ListaContribuicoes * listaPaginas)
 	return 0;
 }
 
-ListaContribuicoes* InserePagina(char *nomePagina, char *nomeArquivo, ListaContribuicoes *lista)
+ListaPaginas* InserePagina(char *nomePagina, char *nomeArquivo, ListaPaginas *lista)
 {
 	printf("InserePagina\n");
 
@@ -121,7 +123,7 @@ ListaContribuicoes* InserePagina(char *nomePagina, char *nomeArquivo, ListaContr
 	return lista;
 }
 
-ListaContribuicoes* RetiraPagina(char *nomePagina, ListaContribuicoes *lista)
+ListaPaginas* RetiraPagina(char *nomePagina, ListaPaginas *lista, ListaLinks *listaLinks, ListaContribuicoes *listaContribuicoes)
 {
 	printf("RetiraPagina\n");
 
@@ -155,8 +157,8 @@ ListaContribuicoes* RetiraPagina(char *nomePagina, ListaContribuicoes *lista)
 	{
 		anterior->Prox = atual->Prox;
 	}
-	RetiraContribuicoesPorPagina(atual);
-	RetiraLinksPorPagina(atual);
+	RetiraContribuicoesPorPagina(atual, listaContribuicoes);
+	RetiraLinksPorPagina(atual, listaLinks);
 	free(atual->nomeArquivo);
 	free(atual->nomePagina);
 	free(atual);
@@ -165,7 +167,7 @@ ListaContribuicoes* RetiraPagina(char *nomePagina, ListaContribuicoes *lista)
 	return lista;
 }
 
-void FimPaginas(ListaContribuicoes *lista)
+void FimPaginas(ListaPaginas *lista)
 {
 	printf("FimPaginas\n");
 

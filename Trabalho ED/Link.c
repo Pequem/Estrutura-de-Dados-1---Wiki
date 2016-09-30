@@ -64,3 +64,8 @@ void removerLink(ListaLinks * lista, Link * l)
 
 	return;
 }
+
+void retiraLinksPorPagina(Pagina * pagina, ListaLinks *listaLinks)
+{
+
+}

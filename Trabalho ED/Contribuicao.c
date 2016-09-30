@@ -50,7 +50,7 @@ void ImprimeContribuicoes(ListaContribuicoes* lista)
 	return;
 }
 
-void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuicao, ListaEditores *listaE, ListaContribuicoes *listaC, ListaContribuicoes *listaP)
+void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuicao, ListaEditores *listaE, ListaContribuicoes *listaC, ListaPaginas *listaP)
 {
 	printf("InsereContribuicao\n");
 
@@ -90,13 +90,17 @@ void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuic
 	return;
 }
 
-void RetiraContribuicoesPorPagina(Pagina * pagina, ListaContribuicoes *listaC)
+void RetiraContribuicoesPorPagina(Pagina * pagina, ListaContribuicoes *listaContribuicoes)
 {
 	Contribuicao *aux;
 	
-	aux = listaC->Primeiro;
+	aux = listaContribuicoes->Primeiro;
 
 	while (aux != NULL) {
-
+		if (aux->pagina == pagina) {
+			aux->excluida = 1;
+		}
+		aux = aux->Prox;
 	}
+	return;
 }
