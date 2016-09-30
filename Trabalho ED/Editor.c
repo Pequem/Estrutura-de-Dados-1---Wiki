@@ -6,14 +6,14 @@
 
 struct editor
 {
-    char *nomeEditor;
-    Editor *Prox;
+	char *nomeEditor;
+	Editor *Prox;
 };
 
 struct listaEditores
 {
-    Editor *Primeiro;
-    Editor *Ultimo;
+	Editor *Primeiro;
+	Editor *Ultimo;
 };
 
 ListaEditores* InicializaListaEditores()
@@ -123,39 +123,45 @@ Editor* recuperaEditorPorNome(char *nome, ListaEditores *lista)
 		return NULL;
 	}
 
-	if (strcmp(lista->Primeiro->nomeEditor, nome))
+	if (strcmp(lista->Primeiro->nomeEditor, nome) == 0)
 	{
 		return lista->Primeiro;
 	}
 
 	aux = lista->Primeiro;
 
-	do
+	for (;;)
 	{
-            aux = aux->Prox;
-	} while (strcmp(nome, aux->nomeEditor) == 0 || aux == NULL);
+		aux = aux->Prox;
+		if (aux == NULL) {
+			break;
+		}
+		if (strcmp(aux->nomeEditor, nome) == 0) {
+			break;
+		}
+	}
 
 	return aux;
 }
 
 void FimEditores(ListaEditores *lista)
 {
-    printf("FimEditores\n");
-    
-    Editor *aux = lista->Primeiro;
-    
-    while (aux != NULL)
-    {
-        Editor *aux1 = aux;
-        
-        free(aux1->nomeEditor);
-        
-        aux = aux->Prox;
-        
-        free(aux1);
-    }
-    
-    free(lista);
-    
-    return;
+	printf("FimEditores\n");
+
+	Editor *aux = lista->Primeiro;
+
+	while (aux != NULL)
+	{
+		Editor *aux1 = aux;
+
+		free(aux1->nomeEditor);
+
+		aux = aux->Prox;
+
+		free(aux1);
+	}
+
+	free(lista);
+
+	return;
 }

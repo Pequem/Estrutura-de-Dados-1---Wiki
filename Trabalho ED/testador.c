@@ -9,7 +9,7 @@
 
 int main(int argc, char *argv[])
 {
-    if (argc != 2)
+   /* if (argc != 2)
     {
         printf("Modelo: %s nome_do_arquivo.txt\n", argv[0]);
         return 1;
@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     {
     	printf("Arquivo nao existe!\n");
     	return 2;
-    }
+    }*/
     
     ListaPaginas* listaPaginas = InicializaListaPaginas();
     ListaEditores* listaEditores = InicializaListaEditores();
@@ -32,35 +32,41 @@ int main(int argc, char *argv[])
     
     do
     {
-        fscanf(file, "%s", funcao);
+		scanf("%s", funcao);
+        //fscanf(file, "%s", funcao);
         
         if (strcmp(funcao, "INSEREPAGINA") == 0)
         {
-            fscanf(file, "%s %s", nomePagina, nomeArquivo);
+			scanf("%s %s", nomePagina, nomeArquivo);
+            //fscanf(file, "%s %s", nomePagina, nomeArquivo);
             listaPaginas = InserePagina(nomePagina, nomeArquivo, listaPaginas);
         }
         
         if (strcmp(funcao, "RETIRAPAGINA") == 0)
         {
-            fscanf(file, "%s", nomePagina);
+            //fscanf(file, "%s", nomePagina);
+			scanf("%s", nomePagina);
             listaPaginas = RetiraPagina(nomePagina, listaPaginas, listaLinks, listaContribuicoes);
         }
         
         if (strcmp(funcao, "INSEREEDITOR")== 0)
         {
-            fscanf(file, "%s", nomeEditor);
+            //fscanf(file, "%s", nomeEditor);
+			scanf("%s", nomeEditor);
             listaEditores = InsereEditor(nomeEditor, listaEditores);
         }
         
         if (strcmp(funcao, "RETIRAEDITOR")== 0)
         {
-            fscanf(file, "%s", nomeEditor);
+            //fscanf(file, "%s", nomeEditor);
+			scanf("%s", nomeEditor);
             listaEditores = RetiraEditor(nomeEditor, listaEditores);
         }
         
         if (strcmp(funcao, "INSERECONTRIBUICAO")== 0)
         {
-            fscanf(file, "%s %s %s", nomePagina, nomeEditor, nomeContribuicao);
+            //fscanf(file, "%s %s %s", nomePagina, nomeEditor, nomeContribuicao);
+			scanf("%s %s %s", nomePagina, nomeEditor, nomeContribuicao);
             InsereContribuicao(nomePagina, nomeEditor, nomeContribuicao, listaEditores, listaContribuicoes, listaPaginas);
         }
     }
@@ -69,7 +75,7 @@ int main(int argc, char *argv[])
     FimPaginas(listaPaginas);
     FimEditores(listaEditores);
     
-    fclose(file);
+    //fclose(file);
     
     return 3;            
 }

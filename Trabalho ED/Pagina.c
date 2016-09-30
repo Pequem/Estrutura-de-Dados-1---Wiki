@@ -50,15 +50,24 @@ Pagina* recuperaPaginaPorNome(ListaPaginas *listaPaginas, char *nome)
 int checkExistencia(char * nomePagina, ListaPaginas * listaPaginas)
 {
 	Pagina *aux;
-	if (strcmp(listaPaginas->Primeiro->nomePagina, nomePagina)) {
+	if (listaPaginas->Primeiro == NULL) {
+		return 0;
+	}
+	if (strcmp(listaPaginas->Primeiro->nomePagina, nomePagina) == 0) {
 		return 1;
 	}
-	do {
+
+	aux = listaPaginas->Primeiro;
+
+	for(;;) {
 		aux = aux->Prox;
+		if (aux == NULL) {
+			break;
+		}
 		if (strcmp(aux->nomePagina, nomePagina)) {
 			return 1;
 		}
-	} while (aux != NULL);
+	}
 	return 0;
 }
 
@@ -67,7 +76,7 @@ ListaPaginas* InserePagina(char *nomePagina, char *nomeArquivo, ListaPaginas *li
 	printf("InserePagina\n");
 
 	if (checkExistencia(nomePagina, lista)) {
-		printf("Pagina ja existe");
+		printf("Pagina ja existe\n");
 		printLog("Pagina", nomePagina, "ja existe");
 		return lista;
 	}
@@ -120,6 +129,7 @@ ListaPaginas* RetiraPagina(char *nomePagina, ListaPaginas *lista, ListaLinks *li
 	{
 		printf("ERRO: PAGINA NAO EXISTE!\n");
 		printLog("ERRO: PAGINA",nomePagina,"NAO EXISTE!");
+		return lista;
 	}
 
 	//PAGINA A SER RETIRADA EH A PRIMEIRA DA LISTA
