@@ -1,7 +1,9 @@
-#ifndef LINK_H_
-#define LINK_H_
-
-
 
 typedef struct link Link;
-#endif // !LINK_H_
+typedef struct listaLinks ListaLinks;
+
+ListaLinks inicializaListaLinks();
+
+void inserirLink(ListaLinks *lista, Pagina *de, Pagina *para);
+
+void removerLink(ListaLinks *lista, Link *l);

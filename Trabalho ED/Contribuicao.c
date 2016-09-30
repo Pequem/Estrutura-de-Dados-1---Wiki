@@ -1,9 +1,11 @@
 #include "Contribuicao.h"
 #include "Editor.h"
 #include "Pagina.h"
+#include <stdlib.h>
 #include <stdio.h>
-#include <string>
-//
+#include <string.h>
+
+
 struct contribuicao
 {
 	char *nomeContribuicao;
@@ -63,8 +65,8 @@ void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuic
 	Contribuicao *c = (Contribuicao*) malloc(sizeof(Contribuicao));
 	c->editor = editor;
 	c->excluida = 0;
-	c->nomeContribuicao = (char*)malloc((strlen(nomeContribuicao)+1) * sizeof(char));
-	strcpy(c->nomeContribuicao, nomeContribuicao);
+	c->nomeContribuicao = (char*)malloc(sizeof(char)*(strlen(nomeContribuicao) + 1));
+	strcpy(c->nomeContribuicao,nomeContribuicao);
 
 	c->Prox = listaC->Ultimo;
 	listaC->Ultimo = c;

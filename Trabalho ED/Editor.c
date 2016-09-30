@@ -2,7 +2,7 @@
 #include "Pagina.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string>
+#include <string.h>
 
 
 struct editor
@@ -53,11 +53,8 @@ ListaEditores* InsereEditor(char *nomeEditor, ListaEditores *lista)
 	Editor *novoEditor = (Editor*)malloc(sizeof(Editor));
 	novoEditor->Prox = NULL;
 
-	int tamNomeEditor = strlen(nomeEditor) + 1;
-
-	novoEditor->nomeEditor = (char*)malloc(tamNomeEditor * sizeof(char));
-
-	strcpy(novoEditor->nomeEditor, nomeEditor);
+	novoEditor->nomeEditor = (char*)malloc(sizeof(char)*(strlen(nomeEditor) + 1));
+	strcpy(novoEditor->nomeEditor,nomeEditor);
 
 	//SE A LISTA ESTIVER VAZIA
 	if (lista->Primeiro == NULL)
@@ -123,12 +120,12 @@ Editor* recuperaEditorPorNome(char *nome, ListaEditores *lista)
 	if (lista->Primeiro == NULL) {
 		return NULL;
 	}
-	if (lista->Primeiro->nomeEditor == nome) {
+	if (strcmp(lista->Primeiro->nomeEditor, nome)) {
 		return lista->Primeiro;
 	}
 	aux = lista->Primeiro;
 	do {
 		aux->Prox;
-	} while (nome == aux->nomeEditor || aux == NULL);
+	} while (strcmp(nome,aux->nomeEditor) || aux == NULL);
 	return aux;
 }
