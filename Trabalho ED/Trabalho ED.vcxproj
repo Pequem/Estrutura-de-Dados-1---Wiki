@@ -151,6 +151,7 @@
     <ClCompile Include="Contribuicao.c" />
     <ClCompile Include="Editor.c" />
     <ClCompile Include="Link.c" />
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="Pagina.c" />
     <ClCompile Include="testador.c" />
   </ItemGroup>
@@ -158,6 +159,7 @@
     <ClInclude Include="Contribuicao.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="Link.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="Pagina.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

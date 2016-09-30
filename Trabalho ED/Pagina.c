@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
+#include "Log.h"
 
 struct pagina
 {
@@ -15,16 +16,16 @@ struct listaPaginas
 	Pagina *Primeiro;
 };
 
-ListaPaginas* InicializaListaPaginas()
+ListaContribuicoes* InicializaListaPaginas()
 {
-	ListaPaginas *lista = (ListaPaginas*)malloc(sizeof(ListaPaginas));
+	ListaContribuicoes *lista = (ListaContribuicoes*)malloc(sizeof(ListaContribuicoes));
 
 	lista->Primeiro = NULL;
 
 	return lista;
 }
 
-void ImprimePaginas(ListaPaginas* lista)
+void ImprimePaginas(ListaContribuicoes* lista)
 {
 	printf("ImprimePaginas\n");
 
@@ -45,7 +46,7 @@ void ImprimePaginas(ListaPaginas* lista)
 	return;
 }
 
-Pagina * recuperaPaginaPorNome(ListaPaginas * listaPaginas, char * nome)
+Pagina * recuperaPaginaPorNome(ListaContribuicoes * listaPaginas, char * nome)
 {
 	Pagina *aux;
 
@@ -69,9 +70,30 @@ Pagina * recuperaPaginaPorNome(ListaPaginas * listaPaginas, char * nome)
 	return aux;
 }
 
-ListaPaginas* InserePagina(char *nomePagina, char *nomeArquivo, ListaPaginas *lista)
+int checkExistencia(char * nomePagina, ListaContribuicoes * listaPaginas)
+{
+	Pagina *aux;
+	if (strcmp(listaPaginas->Primeiro->nomePagina, nomePagina)) {
+		return 1;
+	}
+	do {
+		aux->Prox;
+		if (strcmp(aux->nomePagina, nomePagina)) {
+			return 1;
+		}
+	} while (aux != NULL);
+	return 0;
+}
+
+ListaContribuicoes* InserePagina(char *nomePagina, char *nomeArquivo, ListaContribuicoes *lista)
 {
 	printf("InserePagina\n");
+
+	if (checkExistencia(nomePagina, lista)) {
+		printf("Pagina ja existe");
+		printLog("Pagina", nomePagina, "ja existe");
+		return lista;
+	}
 
 	Pagina *novaPagina = (Pagina*)malloc(sizeof(Pagina));
 	novaPagina->Prox = NULL;
@@ -95,11 +117,11 @@ ListaPaginas* InserePagina(char *nomePagina, char *nomeArquivo, ListaPaginas *li
 		novaPagina->Prox = lista->Primeiro;
 		lista->Primeiro = novaPagina;
 	}
-
+	printLog("Pagina", nomePagina, "inserida");
 	return lista;
 }
 
-ListaPaginas* RetiraPagina(char *nomePagina, ListaPaginas *lista)
+ListaContribuicoes* RetiraPagina(char *nomePagina, ListaContribuicoes *lista)
 {
 	printf("RetiraPagina\n");
 
@@ -118,34 +140,32 @@ ListaPaginas* RetiraPagina(char *nomePagina, ListaPaginas *lista)
 
 	//CASO A PAGINA NAO EXISTA
 	if (atual == NULL)
+	{
 		printf("ERRO: PAGINA NAO EXISTE!\n");
+		printLog("ERRO: PAGINA",nomePagina,"NAO EXISTE!");
+	}
 
 	//PAGINA A SER RETIRADA EH A PRIMEIRA DA LISTA
 	else if (atual == lista->Primeiro)
 	{
-		//RetiraContribuicoes_Pagina(atual); <- implementar
 		lista->Primeiro = atual->Prox;
-
-		free(atual->nomeArquivo);
-		free(atual->nomePagina);
-		free(atual);
 	}
-
 	//PAGINA A SER RETIRADA ESTA EM OUTRA POSICAO DA LISTA
 	else
 	{
-		//RetiraContribuicoes_Pagina(atual); <- implementar
 		anterior->Prox = atual->Prox;
-
-		free(atual->nomeArquivo);
-		free(atual->nomePagina);
-		free(atual);
 	}
+	RetiraContribuicoesPorPagina(atual);
+	RetiraLinksPorPagina(atual);
+	free(atual->nomeArquivo);
+	free(atual->nomePagina);
+	free(atual);
+	printLog("Pagina", nomePagina, "retirada");
 
 	return lista;
 }
 
-void FimPaginas(ListaPaginas *lista)
+void FimPaginas(ListaContribuicoes *lista)
 {
 	printf("FimPaginas\n");
 

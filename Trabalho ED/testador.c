@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 		return 2;
 	}*/
 
-	ListaPaginas* listaPaginas = InicializaListaPaginas();
+	ListaContribuicoes* listaPaginas = InicializaListaPaginas();
 	ListaEditores* listaEditores = InicializaListaEditores();
 	ListaContribuicoes* listaContribuicoes = InicializaListaContribuicoes();
 

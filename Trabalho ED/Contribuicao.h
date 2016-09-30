@@ -26,4 +26,6 @@ ListaContribuicoes* InicializaListaContribuicoes();
 * Pre-Condicao:
 * Pos-Condicao:
 */
-void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuicao, ListaEditores *listaE, ListaContribuicoes *listaC, ListaPaginas *listaP);
+void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuicao, ListaEditores *listaE, ListaContribuicoes *listaC, ListaContribuicoes *listaP);
+
+void RetiraContribuicoesPorPagina(Pagina *pagina, ListaContribuicoes *listaC);

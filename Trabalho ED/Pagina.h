@@ -9,7 +9,7 @@
 typedef struct pagina Pagina;
 
 
-typedef struct listaPaginas ListaPaginas;
+typedef struct listaPaginas ListaContribuicoes;
 
 /* CRIA UMA NOVA LISTA DE PAGINAS
 * Inputs: Nenhum
@@ -17,7 +17,7 @@ typedef struct listaPaginas ListaPaginas;
 * Pre-Condicao:
 * Pos-Condicao:
 */
-ListaPaginas* InicializaListaPaginas();
+ListaContribuicoes* InicializaListaPaginas();
 
 /* INSERE A PAGINA NO INICIO DA LISTA DE PAGINAS
 * Inputs: Nome da pagina, o nome do arquivo da pagina e a lista de paginas
@@ -25,7 +25,7 @@ ListaPaginas* InicializaListaPaginas();
 * Pre-Condicao:
 * Pos-Condicao:
 */
-ListaPaginas* InserePagina(char *nomePagina, char *nomeArquivo, ListaPaginas* lista);
+ListaContribuicoes* InserePagina(char *nomePagina, char *nomeArquivo, ListaContribuicoes* lista);
 
 /* RETIRA PAGINA DA LISTA
 * Inputs: Nome da pagina
@@ -33,7 +33,7 @@ ListaPaginas* InserePagina(char *nomePagina, char *nomeArquivo, ListaPaginas* li
 * Pre-Condicao:
 * Pos-Condicao:
 */
-ListaPaginas* RetiraPagina(char *nomePagina, ListaPaginas *lista);
+ListaContribuicoes* RetiraPagina(char *nomePagina, ListaContribuicoes *lista);
 
 /* LIBERA O ESPACO ALOCADO PELA LISTA DE PAGINAS
 * Inputs: Lista de paginas
@@ -41,9 +41,10 @@ ListaPaginas* RetiraPagina(char *nomePagina, ListaPaginas *lista);
 * Pre-Condicao:
 * Pos-Condicao:
 */
-void FimPaginas(ListaPaginas* lista);
+void FimPaginas(ListaContribuicoes* lista);
 
-void ImprimePaginas(ListaPaginas* lista);
+void ImprimePaginas(ListaContribuicoes* lista);
 
-Pagina* recuperaPaginaPorNome(ListaPaginas *listaPaginas, char *nome);
+Pagina* recuperaPaginaPorNome(ListaContribuicoes *listaPaginas, char *nome);
 
+int checkExistencia(char *nomePagina, ListaContribuicoes *listaPaginas);
