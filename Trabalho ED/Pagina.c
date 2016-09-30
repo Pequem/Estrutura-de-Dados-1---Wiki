@@ -1,90 +1,61 @@
-#include "Pagina.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string>
+#include <string.h>
+#include "Definicoes.h"
+#include "Pagina.h"
 #include "Log.h"
-#include "Link.h"
 #include "Contribuicao.h"
-
-typedef struct link Link;
-typedef struct listaLinks ListaLinks;
-
+#include "Link.h"
 
 struct pagina
 {
-	char *nomePagina;
-	char *nomeArquivo;
-	Pagina *Prox;
+    char *nomePagina;
+    char *nomeArquivo;
+    Pagina *Prox;
 };
 
 struct listaPaginas
 {
-	Pagina *Primeiro;
+    Pagina *Primeiro;
 };
 
 ListaPaginas* InicializaListaPaginas()
 {
-	ListaPaginas *lista = (ListaPaginas*)malloc(sizeof(ListaPaginas));
+    ListaPaginas *lista = (ListaPaginas*)malloc(sizeof(ListaPaginas));
+    lista->Primeiro = NULL;
 
-	lista->Primeiro = NULL;
-
-	return lista;
+    return lista;
 }
 
-void ImprimePaginas(ListaPaginas* lista)
+Pagina* recuperaPaginaPorNome(ListaPaginas *listaPaginas, char *nome)
 {
-	printf("ImprimePaginas\n");
+    Pagina *pagina;
 
-	Pagina *aux = lista->Primeiro;
+    if (listaPaginas->Primeiro == NULL)
+        return NULL;
 
-	if (aux == NULL)
-	{
-		printf("Nao ha paginas");
-		return;
-	}
+    if (listaPaginas->Primeiro->nomePagina == nome)
+        return listaPaginas->Primeiro;
 
-	do
-	{
-		printf("%s->", aux->nomePagina);
-		aux = aux->Prox;
-	} while (aux != NULL);
+    pagina = listaPaginas->Primeiro;
 
-	return;
-}
+    do
+    {
+        pagina = pagina->Prox;
+    }while (nome == pagina->nomePagina || pagina == NULL);
 
-Pagina * recuperaPaginaPorNome(ListaPaginas * listaPaginas, char * nome)
-{
-	Pagina *aux;
-
-	if (listaPaginas->Primeiro == NULL)
-	{
-		return NULL;
-	}
-
-	if (listaPaginas->Primeiro->nomePagina == nome)
-	{
-		return listaPaginas->Primeiro;
-	}
-
-	aux = listaPaginas->Primeiro;
-
-	do
-	{
-		aux->Prox;
-	} while (nome == aux->nomePagina || aux == NULL);
-
-	return aux;
+    return pagina;
 }
 
 int checkExistencia(char * nomePagina, ListaPaginas * listaPaginas)
 {
 	Pagina *aux;
-	if (strcmp(listaPaginas->Primeiro->nomePagina, nomePagina) == 0) {
+	if (strcmp(listaPaginas->Primeiro->nomePagina, nomePagina)) {
 		return 1;
 	}
 	do {
-		aux->Prox;
-		if (strcmp(aux->nomePagina, nomePagina) == 0) {
+		aux = aux->Prox;
+		if (strcmp(aux->nomePagina, nomePagina)) {
 			return 1;
 		}
 	} while (aux != NULL);

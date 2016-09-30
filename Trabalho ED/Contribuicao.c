@@ -1,9 +1,10 @@
-#include "Contribuicao.h"
-#include "Editor.h"
-#include "Pagina.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "Definicoes.h"
+#include "Contribuicao.h"
+#include "Editor.h"
+#include "Pagina.h"
 
 
 struct contribuicao

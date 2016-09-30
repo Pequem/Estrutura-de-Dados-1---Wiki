@@ -1,19 +1,19 @@
-#include "Editor.h"
-#include "Pagina.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "Definicoes.h"
+#include "Editor.h"
 
 struct editor
 {
-	char *nomeEditor;
-	Editor *Prox;
+    char *nomeEditor;
+    Editor *Prox;
 };
 
 struct listaEditores
 {
-	Editor *Primeiro, *Ultimo;
+    Editor *Primeiro;
+    Editor *Ultimo;
 };
 
 ListaEditores* InicializaListaEditores()
@@ -123,7 +123,7 @@ Editor* recuperaEditorPorNome(char *nome, ListaEditores *lista)
 		return NULL;
 	}
 
-	if (strcmp(lista->Primeiro->nomeEditor, nome) == 0)
+	if (strcmp(lista->Primeiro->nomeEditor, nome))
 	{
 		return lista->Primeiro;
 	}
@@ -132,8 +132,30 @@ Editor* recuperaEditorPorNome(char *nome, ListaEditores *lista)
 
 	do
 	{
-		aux->Prox;
-	} while ((strcmp(nome, aux->nomeEditor) == 0) || (aux == NULL));
+            aux = aux->Prox;
+	} while (strcmp(nome, aux->nomeEditor) == 0 || aux == NULL);
 
 	return aux;
+}
+
+void FimEditores(ListaEditores *lista)
+{
+    printf("FimEditores\n");
+    
+    Editor *aux = lista->Primeiro;
+    
+    while (aux != NULL)
+    {
+        Editor *aux1 = aux;
+        
+        free(aux1->nomeEditor);
+        
+        aux = aux->Prox;
+        
+        free(aux1);
+    }
+    
+    free(lista);
+    
+    return;
 }

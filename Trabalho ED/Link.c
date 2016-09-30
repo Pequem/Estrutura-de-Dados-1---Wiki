@@ -13,7 +13,7 @@ struct listaLinks
 	Link *Primeiro, *Ultimo;
 };
 
-ListaLinks *inicializaListaLinks()
+ListaLinks *InicializaListaLinks()
 {
 	ListaLinks *lista = (ListaLinks*)malloc(sizeof(ListaLinks));
 
@@ -56,7 +56,7 @@ void removerLink(ListaLinks * lista, Link * l)
 
 	do
 	{
-		aux->Prox;
+		aux = aux->Prox;
 	} while (aux->Prox != l);
 
 	aux->Prox = aux->Prox->Prox;

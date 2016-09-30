@@ -1,7 +1,5 @@
 #include "Definicoes.h"
 
-
-
 /* CRIA UMA NOVA LISTA DE EDITORES
 * Inputs: Nenhum
 * Outputs: Lista de editores

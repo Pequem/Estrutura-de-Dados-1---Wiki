@@ -1,6 +1,7 @@
-#include "Log.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "Definicoes.h"
+#include "Log.h"
 
 int printLog(char * msg, char *msg2, char *msg3)
 {

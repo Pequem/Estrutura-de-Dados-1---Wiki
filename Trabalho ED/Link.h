@@ -1,6 +1,6 @@
 #include "Definicoes.h"
 
-ListaLinks *inicializaListaLinks();
+ListaLinks *InicializaListaLinks();
 
 void inserirLink(ListaLinks *lista, Pagina *de, Pagina *para);
 

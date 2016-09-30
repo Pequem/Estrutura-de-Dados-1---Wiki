@@ -1,6 +1,5 @@
 #include "Definicoes.h"
 
-
 /* CRIA UMA NOVA LISTA DE PAGINAS
 * Inputs: Nenhum
 * Outputs: Lista de paginas
@@ -23,7 +22,7 @@ ListaPaginas* InserePagina(char *nomePagina, char *nomeArquivo, ListaPaginas* li
 * Pre-Condicao:
 * Pos-Condicao:
 */
-ListaPaginas* RetiraPagina(char *nomePagina, ListaPaginas *lista, ListaLinks *listaLinks, ListaContribuicoes *listaContribuicos);
+ListaPaginas* RetiraPagina(char *nomePagina, ListaPaginas *lista, ListaLinks *listaLinks, ListaContribuicoes *listaContribuicoes);
 
 /* LIBERA O ESPACO ALOCADO PELA LISTA DE PAGINAS
 * Inputs: Lista de paginas
