@@ -33,11 +33,8 @@
     <ClCompile Include="testador.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Log.cpp">
+    <ClCompile Include="Log.c">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Definicoes.h">
-      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -54,6 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Definicoes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

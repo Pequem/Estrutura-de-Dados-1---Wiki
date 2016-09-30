@@ -1,7 +1,6 @@
 typedef struct link Link;
 typedef struct listaLinks ListaLinks;
 
-
 typedef struct pagina Pagina;
 typedef struct listaPaginas ListaPaginas;
 

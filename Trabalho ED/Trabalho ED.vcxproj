@@ -149,15 +149,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Contribuicao.c" />
-    <ClCompile Include="Definicoes.h" />
     <ClCompile Include="Editor.c" />
     <ClCompile Include="Link.c" />
-    <ClCompile Include="Log.cpp" />
+    <ClCompile Include="Log.c" />
     <ClCompile Include="Pagina.c" />
     <ClCompile Include="testador.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Contribuicao.h" />
+    <ClInclude Include="Definicoes.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="Link.h" />
     <ClInclude Include="Log.h" />

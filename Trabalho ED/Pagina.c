@@ -6,6 +6,10 @@
 #include "Link.h"
 #include "Contribuicao.h"
 
+typedef struct link Link;
+typedef struct listaLinks ListaLinks;
+
+
 struct pagina
 {
 	char *nomePagina;

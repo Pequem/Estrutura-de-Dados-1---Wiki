@@ -13,13 +13,13 @@ struct listaLinks
 	Link *Primeiro, *Ultimo;
 };
 
-ListaLinks inicializaListaLinks()
+ListaLinks *inicializaListaLinks()
 {
 	ListaLinks *lista = (ListaLinks*)malloc(sizeof(ListaLinks));
 
 	lista->Primeiro = lista->Ultimo = NULL;
 
-	return ListaLinks();
+	return lista;
 }
 
 void inserirLink(ListaLinks * lista, Pagina *de, Pagina *para)
