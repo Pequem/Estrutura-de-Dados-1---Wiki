@@ -123,7 +123,7 @@ Editor* recuperaEditorPorNome(char *nome, ListaEditores *lista)
 		return NULL;
 	}
 
-	if (strcmp(lista->Primeiro->nomeEditor, nome))
+	if (strcmp(lista->Primeiro->nomeEditor, nome) == 0)
 	{
 		return lista->Primeiro;
 	}
@@ -133,7 +133,7 @@ Editor* recuperaEditorPorNome(char *nome, ListaEditores *lista)
 	do
 	{
 		aux->Prox;
-	} while (strcmp(nome, aux->nomeEditor) || aux == NULL);
+	} while ((strcmp(nome, aux->nomeEditor) == 0) || (aux == NULL));
 
 	return aux;
 }

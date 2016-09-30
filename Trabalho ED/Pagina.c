@@ -79,12 +79,12 @@ Pagina * recuperaPaginaPorNome(ListaPaginas * listaPaginas, char * nome)
 int checkExistencia(char * nomePagina, ListaPaginas * listaPaginas)
 {
 	Pagina *aux;
-	if (strcmp(listaPaginas->Primeiro->nomePagina, nomePagina)) {
+	if (strcmp(listaPaginas->Primeiro->nomePagina, nomePagina) == 0) {
 		return 1;
 	}
 	do {
 		aux->Prox;
-		if (strcmp(aux->nomePagina, nomePagina)) {
+		if (strcmp(aux->nomePagina, nomePagina) == 0) {
 			return 1;
 		}
 	} while (aux != NULL);
