@@ -54,7 +54,7 @@ ListaEditores* InsereEditor(char *nomeEditor, ListaEditores *lista)
 	novoEditor->Prox = NULL;
 
 	novoEditor->nomeEditor = (char*)malloc(sizeof(char)*(strlen(nomeEditor) + 1));
-	strcpy(novoEditor->nomeEditor,nomeEditor);
+	strcpy(novoEditor->nomeEditor, nomeEditor);
 
 	//SE A LISTA ESTIVER VAZIA
 	if (lista->Primeiro == NULL)
@@ -117,15 +117,23 @@ ListaEditores* RetiraEditor(char *nomeEditor, ListaEditores *lista)
 Editor* recuperaEditorPorNome(char *nome, ListaEditores *lista)
 {
 	Editor *aux;
-	if (lista->Primeiro == NULL) {
+
+	if (lista->Primeiro == NULL)
+	{
 		return NULL;
 	}
-	if (strcmp(lista->Primeiro->nomeEditor, nome)) {
+
+	if (strcmp(lista->Primeiro->nomeEditor, nome))
+	{
 		return lista->Primeiro;
 	}
+
 	aux = lista->Primeiro;
-	do {
+
+	do
+	{
 		aux->Prox;
-	} while (strcmp(nome,aux->nomeEditor) || aux == NULL);
+	} while (strcmp(nome, aux->nomeEditor) || aux == NULL);
+
 	return aux;
 }

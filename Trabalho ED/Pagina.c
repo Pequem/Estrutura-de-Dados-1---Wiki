@@ -48,16 +48,24 @@ void ImprimePaginas(ListaPaginas* lista)
 Pagina * recuperaPaginaPorNome(ListaPaginas * listaPaginas, char * nome)
 {
 	Pagina *aux;
-	if (listaPaginas->Primeiro == NULL) {
+
+	if (listaPaginas->Primeiro == NULL)
+	{
 		return NULL;
 	}
-	if (listaPaginas->Primeiro->nomePagina == nome) {
+
+	if (listaPaginas->Primeiro->nomePagina == nome)
+	{
 		return listaPaginas->Primeiro;
 	}
+
 	aux = listaPaginas->Primeiro;
-	do {
+
+	do
+	{
 		aux->Prox;
 	} while (nome == aux->nomePagina || aux == NULL);
+
 	return aux;
 }
 
@@ -137,15 +145,15 @@ ListaPaginas* RetiraPagina(char *nomePagina, ListaPaginas *lista)
 	return lista;
 }
 
-ListaPaginas* FimPaginas(ListaPaginas *lista)
+void FimPaginas(ListaPaginas *lista)
 {
 	printf("FimPaginas\n");
 
-	Pagina *aux = lista->Primeiro;
+	Pagina *aux1, *aux = lista->Primeiro;
 
 	while (aux != NULL)
 	{
-		Pagina *aux1 = aux;
+		aux1 = aux;
 
 		free(aux1->nomeArquivo);
 		free(aux1->nomePagina);
@@ -156,6 +164,4 @@ ListaPaginas* FimPaginas(ListaPaginas *lista)
 	}
 
 	free(lista);
-
-	return lista;
 }

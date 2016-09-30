@@ -40,7 +40,7 @@ ListaEditores* RetiraEditor(char *nomeEditor, ListaEditores *lista);
 * Pre-Condicao:
 * Pos-Condicao:
 */
-ListaEditores* FimEditores(ListaEditores* lista);
+void FimEditores(ListaEditores* lista);
 
 void ImprimeEditores(ListaEditores* lista);
 

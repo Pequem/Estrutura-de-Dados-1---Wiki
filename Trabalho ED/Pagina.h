@@ -41,7 +41,7 @@ ListaPaginas* RetiraPagina(char *nomePagina, ListaPaginas *lista);
 * Pre-Condicao:
 * Pos-Condicao:
 */
-ListaPaginas* FimPaginas(ListaPaginas* lista);
+void FimPaginas(ListaPaginas* lista);
 
 void ImprimePaginas(ListaPaginas* lista);
 
