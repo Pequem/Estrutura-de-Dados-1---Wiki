@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
     
     ListaPaginas* listaPaginas = InicializaListaPaginas();
     ListaEditores* listaEditores = InicializaListaEditores();
+	ListaContribuicoes* listaContribuicoes = InicializaListaContribuicoes();
     
     char funcao[20], nomePagina[20], nomeArquivo[20], nomeEditor[20], nomeContribuicao[20];
     
@@ -35,31 +36,35 @@ int main(int argc, char *argv[])
         {
             fscanf(file, "%s %s", nomePagina, nomeArquivo);
             listaPaginas = InserePagina(nomePagina, nomeArquivo, listaPaginas);
-        }
+        }else
         
         if (strcmp(funcao, "RETIRAPAGINA") == 0)
         {
             fscanf(file, "%s", nomePagina);
             listaPaginas = RetiraPagina(nomePagina, listaPaginas);
-        }
+        }else
         
         if (strcmp(funcao, "INSEREEDITOR")== 0)
         {
             fscanf(file, "%s", nomeEditor);
             listaEditores = InsereEditor(nomeEditor, listaEditores);
-        }
+        }else
         
         if (strcmp(funcao, "RETIRAEDITOR")== 0)
         {
             fscanf(file, "%s", nomeEditor);
             listaEditores = RetiraEditor(nomeEditor, listaEditores);
-        }
+        }else
         
         if (strcmp(funcao, "INSERECONTRIBUICAO")== 0)
         {
             fscanf(file, "%s %s %s", nomePagina, nomeEditor, nomeContribuicao);
-            //InsereContribuicao(nomePagina, nomeEditor, nomeContribuicao, listaEditores);
-        }
+            InsereContribuicao(nomePagina, nomeEditor, nomeContribuicao, listaEditores, listaContribuicoes, listaPaginas);
+		}
+		else
+		{
+			printf("ERRO: COMANDO INVALIDO!\N");
+		}
     }
     while (strcmp(funcao,"FIM") != 0);
     

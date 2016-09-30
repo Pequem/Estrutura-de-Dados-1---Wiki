@@ -60,6 +60,11 @@ void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuic
 	if (editor == NULL)
 	{
 		printf("ERRO: EDITOR NAO EXISTE!\n");
+		return;
+	}
+	if (pagina == NULL) {
+		printf("ERRO: PAGINA NAO EXISTE!\N");
+		return;
 	}
 
 	Contribuicao *c = (Contribuicao*) malloc(sizeof(Contribuicao));
@@ -67,8 +72,13 @@ void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuic
 	c->excluida = 0;
 	c->nomeContribuicao = (char*)malloc(sizeof(char)*(strlen(nomeContribuicao) + 1));
 	strcpy(c->nomeContribuicao,nomeContribuicao);
-
+	c->Prox = NULL;
+	c->pagina = pagina;
+	if (listaC->Primeiro == NULL) {
+		listaC->Primeiro = listaC->Ultimo = c;
+		return;
+	}
 	c->Prox = listaC->Ultimo;
 	listaC->Ultimo = c;
-
+	return;
 }
