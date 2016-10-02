@@ -119,3 +119,4 @@ void CheckLink(ListaLinks * listaLinks, ListaPaginas * listaPaginas, char * nome
 	};
 	printf("CAMINHO INVALIDO\n");
 }
+//teste
