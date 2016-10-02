@@ -17,3 +17,7 @@ ListaContribuicoes* InicializaListaContribuicoes();
 void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuicao, ListaEditores *listaE, ListaContribuicoes *listaC, ListaPaginas *listaP);
 
 void RetiraContribuicoesPorPagina(Pagina *pagina, ListaContribuicoes *listaContribuicoes);
+
+void FimContribuicoes(ListaContribuicoes *lista);
+
+void RetiraContribuicao(ListaContribuicoes *listaContribuicoes,char *nomeContribuicao);

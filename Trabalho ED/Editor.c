@@ -149,10 +149,11 @@ void FimEditores(ListaEditores *lista)
 	printf("FimEditores\n");
 
 	Editor *aux = lista->Primeiro;
+	Editor *aux1;
 
 	while (aux != NULL)
 	{
-		Editor *aux1 = aux;
+		aux1 = aux;
 
 		free(aux1->nomeEditor);
 

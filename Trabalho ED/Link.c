@@ -1,6 +1,7 @@
 #include "Pagina.h"
 #include "Link.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 struct link
 {
@@ -22,12 +23,18 @@ ListaLinks *InicializaListaLinks()
 	return lista;
 }
 
-void inserirLink(ListaLinks * lista, Pagina *de, Pagina *para)
+void InsereLink(ListaLinks * lista, ListaPaginas *listaPaginas, char *deNome, char *paraNome)
 {
 	Link *l = (Link*)malloc(sizeof(Link));
 
-	l->de = de;
-	l->para = para;
+	l->de = RecuperaPaginaPorNome(listaPaginas, deNome);;
+	l->para = RecuperaPaginaPorNome(listaPaginas, paraNome);
+	l->Prox = NULL;
+
+	if (l->de == NULL || l->para == NULL) {
+		printf("ERRO: PAGINA NAO EXISTE (INSERELINK)\n");
+		return;
+	}
 
 	if (lista->Primeiro == NULL)
 	{
@@ -35,13 +42,13 @@ void inserirLink(ListaLinks * lista, Pagina *de, Pagina *para)
 		return;
 	}
 
-	l->Prox = lista->Ultimo;
+	lista->Ultimo->Prox = l;
 	lista->Ultimo = l;
 
 	return;
 }
 
-void removerLink(ListaLinks * lista, Link * l)
+void RemoverLink(ListaLinks * lista, Link * l)
 {
 	Link *aux;
 
@@ -57,15 +64,58 @@ void removerLink(ListaLinks * lista, Link * l)
 	do
 	{
 		aux = aux->Prox;
-	} while (aux->Prox != l);
-
-	aux->Prox = aux->Prox->Prox;
-	free(l);
+	} while (aux->Prox != l || aux->Prox == NULL);
+	if (aux->Prox != NULL) {
+		aux->Prox = aux->Prox->Prox;
+		free(l);
+	}
 
 	return;
 }
 
 void RetiraLinksPorPagina(Pagina * pagina, ListaLinks *listaLinks)
 {
+	Link *link = listaLinks->Primeiro;
+	Link *prox;
 
+	do {
+		prox = link->Prox;
+		if (link->de == pagina) {
+			RemoverLink(listaLinks, link);
+		}
+		link = prox;
+	} while (link == NULL);
+}
+
+void FimLinks(ListaLinks *lista) {
+	Link *aux = lista->Primeiro;
+	Link *aux1;
+
+	while (aux != NULL)
+	{
+		aux1 = aux;
+		aux = aux->Prox;
+
+		free(aux1);
+	}
+
+	free(lista);
+
+	return;
+}
+
+void CheckLink(ListaLinks * listaLinks, ListaPaginas * listaPaginas, char * nomeDe, char * nomePara)
+{
+	Link *aux = listaLinks->Primeiro;
+	Pagina *de = RecuperaPaginaPorNome(listaPaginas, nomeDe);
+	Pagina *para = RecuperaPaginaPorNome(listaPaginas, nomePara);
+
+	while (aux != NULL) {
+		if ((aux->de == de) && (aux->para == para)) {
+			printf("CAMINHA VALIDO\n");
+			return;
+		};
+		aux = aux->Prox;
+	};
+	printf("CAMINHO INVALIDO\n");
 }

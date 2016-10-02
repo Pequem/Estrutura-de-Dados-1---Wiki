@@ -2,8 +2,12 @@
 
 ListaLinks *InicializaListaLinks();
 
-void inserirLink(ListaLinks *lista, Pagina *de, Pagina *para);
+void InsereLink(ListaLinks *listaLinks, ListaPaginas *listaPaginas, char *deNome, char *paraNome);
 
-void removerLink(ListaLinks *lista, Link *l);
+void RemoverLink(ListaLinks *lista, Link *l);
 
 void RetiraLinksPorPagina(Pagina *pagina, ListaLinks *listaLinks);
+
+void FimLinks(ListaLinks *lista);
+
+void CheckLink(ListaLinks *listaLinks, ListaPaginas *listaPaginas, char *nomeDe, char *nomePara);

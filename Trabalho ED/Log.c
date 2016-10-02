@@ -6,7 +6,7 @@
 int printLog(char * msg, char *msg2, char *msg3)
 {
 	FILE *log;
-	log = fopen("log.txt", "w");
+	log = fopen("log.txt", "w"); //TROCA PARA "APENND"!
 	
 	if (log == NULL)
 	{

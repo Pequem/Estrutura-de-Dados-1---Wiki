@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     ListaContribuicoes* listaContribuicoes = InicializaListaContribuicoes();
     ListaLinks* listaLinks = InicializaListaLinks();
     
-    char funcao[20], nomePagina[20], nomeArquivo[20], nomeEditor[20], nomeContribuicao[20];
+    char funcao[20], nomePagina[20], nomePagina2[20], nomeArquivo[20], nomeEditor[20], nomeContribuicao[20];
     
     do
     {
@@ -69,11 +69,31 @@ int main(int argc, char *argv[])
 			scanf("%s %s %s", nomePagina, nomeEditor, nomeContribuicao);
             InsereContribuicao(nomePagina, nomeEditor, nomeContribuicao, listaEditores, listaContribuicoes, listaPaginas);
         }
+
+		if (strcmp(funcao, "INSERELINK") == 0)
+		{
+			scanf("%s %s", nomePagina, nomePagina2);
+			InsereLink(listaLinks, listaPaginas, nomePagina, nomePagina2);
+		}
+		if (strcmp(funcao, "IMPRIMEPAGINA") == 0) {
+			scanf("%s", nomePagina);
+			//chama
+		}
+		if (strcmp(funcao, "RETIRACONTRIBUICAO") == 0) {
+			scanf("%s %s %s", nomePagina, nomeEditor, nomeContribuicao);
+			RetiraContribuicao(listaContribuicoes, nomeContribuicao);
+		}
+		if (strcmp(funcao, "CAMINHO") == 0) {
+			scanf("%s %s", nomePagina, nomePagina2);
+			CheckLink(listaLinks, listaPaginas, nomePagina, nomePagina2);
+		}
     }
     while (strcmp(funcao,"FIM") != 0);
     
     FimPaginas(listaPaginas);
     FimEditores(listaEditores);
+	FimContribuicoes(listaContribuicoes);
+	FimLinks(listaLinks);
     
     //fclose(file);
     

@@ -56,7 +56,7 @@ void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuic
 	printf("InsereContribuicao\n");
 
 	Editor *editor = recuperaEditorPorNome(nomeEditor, listaE);
-	Pagina *pagina = recuperaPaginaPorNome(listaP, nomePagina);
+	Pagina *pagina = RecuperaPaginaPorNome(listaP, nomePagina);
 
 	if (editor == NULL)
 	{
@@ -85,7 +85,7 @@ void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuic
 		return;
 	}
 
-	c->Prox = listaC->Ultimo;
+	listaC->Ultimo->Prox = c;
 	listaC->Ultimo = c;
 
 	return;
@@ -103,5 +103,37 @@ void RetiraContribuicoesPorPagina(Pagina * pagina, ListaContribuicoes *listaCont
 		}
 		aux = aux->Prox;
 	}
+	return;
+}
+
+void FimContribuicoes(ListaContribuicoes * lista)
+{
+	Contribuicao *aux;
+	Contribuicao *prox;
+	
+	aux = lista->Primeiro;
+
+	do{
+		prox = aux->Prox;
+		free(aux->nomeContribuicao);
+		free(aux);
+		aux = prox;
+	}while (prox != NULL);
+
+	free(lista);
+}
+
+void RetiraContribuicao(ListaContribuicoes *listaContribuicoes,char *nomeContribuicao) {
+	Contribuicao *aux;
+
+	aux = listaContribuicoes->Primeiro;
+
+	while (aux != NULL) {
+		if (strcmp(aux->nomeContribuicao,nomeContribuicao) == 0) {
+			aux->excluida = 1;
+		}
+		aux = aux->Prox;
+	}
+
 	return;
 }

@@ -32,8 +32,6 @@ ListaPaginas* RetiraPagina(char *nomePagina, ListaPaginas *lista, ListaLinks *li
 */
 void FimPaginas(ListaPaginas* lista);
 
-void ImprimePaginas(ListaPaginas* lista);
+Pagina* RecuperaPaginaPorNome(ListaPaginas *listaPaginas, char *nome);
 
-Pagina* recuperaPaginaPorNome(ListaPaginas *listaPaginas, char *nome);
-
-int checkExistencia(char *nomePagina, ListaPaginas *listaPaginas);
+int CheckExistencia(char *nomePagina, ListaPaginas *listaPaginas);

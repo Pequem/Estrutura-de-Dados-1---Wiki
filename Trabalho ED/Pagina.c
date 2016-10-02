@@ -27,14 +27,14 @@ ListaPaginas* InicializaListaPaginas()
     return lista;
 }
 
-Pagina* recuperaPaginaPorNome(ListaPaginas *listaPaginas, char *nome)
+Pagina* RecuperaPaginaPorNome(ListaPaginas *listaPaginas, char *nome)
 {
     Pagina *pagina;
 
     if (listaPaginas->Primeiro == NULL)
         return NULL;
 
-    if (listaPaginas->Primeiro->nomePagina == nome)
+    if (strcmp(listaPaginas->Primeiro->nomePagina, nome) == 0)
         return listaPaginas->Primeiro;
 
     pagina = listaPaginas->Primeiro;
@@ -42,12 +42,15 @@ Pagina* recuperaPaginaPorNome(ListaPaginas *listaPaginas, char *nome)
     do
     {
         pagina = pagina->Prox;
-    }while (nome == pagina->nomePagina || pagina == NULL);
+		if (pagina == NULL) {
+			break;
+		}
+    }while ((strcmp(nome,pagina->nomePagina) != 0));
 
     return pagina;
 }
 
-int checkExistencia(char * nomePagina, ListaPaginas * listaPaginas)
+int CheckExistencia(char * nomePagina, ListaPaginas * listaPaginas)
 {
 	Pagina *aux;
 	if (listaPaginas->Primeiro == NULL) {
@@ -64,7 +67,7 @@ int checkExistencia(char * nomePagina, ListaPaginas * listaPaginas)
 		if (aux == NULL) {
 			break;
 		}
-		if (strcmp(aux->nomePagina, nomePagina)) {
+		if (strcmp(aux->nomePagina, nomePagina) == 0) {
 			return 1;
 		}
 	}
@@ -75,7 +78,7 @@ ListaPaginas* InserePagina(char *nomePagina, char *nomeArquivo, ListaPaginas *li
 {
 	printf("InserePagina\n");
 
-	if (checkExistencia(nomePagina, lista)) {
+	if (CheckExistencia(nomePagina, lista)) {
 		printf("Pagina ja existe\n");
 		printLog("Pagina", nomePagina, "ja existe");
 		return lista;
