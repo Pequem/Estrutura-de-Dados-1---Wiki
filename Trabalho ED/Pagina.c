@@ -74,6 +74,23 @@ int CheckExistencia(char * nomePagina, ListaPaginas * listaPaginas)
 	return 0;
 }
 
+void ImprimePagina(ListaPaginas * listaPaginas, ListaContribuicoes * listaContribuicoes, ListaLinks * listaLinks, ListaEditores * listaEditores, char * nomePagina)
+{
+	Pagina *pagina = RecuperaPaginaPorNome(listaPaginas, nomePagina);
+	Char *contribuicao
+
+	if (pagina == NULL) {
+		printf("ERRO: PAGINA %s NAO EXISTE", nomePagina);
+		printLog("ERRO: PAGINA", nomePagina, "NAO EXISTE");
+	}
+
+	FILE *arq;
+	
+	char *nomeArquivo = pagina->nomeArquivo;
+	
+	arq = fopen(nomeArquivo, "w");
+}
+
 ListaPaginas* InserePagina(char *nomePagina, char *nomeArquivo, ListaPaginas *lista)
 {
 	printf("InserePagina\n");

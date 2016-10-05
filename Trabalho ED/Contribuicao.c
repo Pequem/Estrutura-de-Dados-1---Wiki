@@ -137,3 +137,13 @@ void RetiraContribuicao(ListaContribuicoes *listaContribuicoes,char *nomeContrib
 
 	return;
 }
+
+char * ContribuicoesParaStringPorPagina(ListaContribuicoes * listaContribuicoes, Pagina *pagina)
+{
+	FILE *arq;
+	char *textContribuicoes;
+
+
+
+	return NULL;
+}

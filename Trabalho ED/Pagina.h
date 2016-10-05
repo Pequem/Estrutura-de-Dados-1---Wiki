@@ -1,3 +1,6 @@
+#ifndef PAGINA_H_
+#define PAGINA_H_
+
 #include "Definicoes.h"
 
 /* CRIA UMA NOVA LISTA DE PAGINAS
@@ -35,3 +38,7 @@ void FimPaginas(ListaPaginas* lista);
 Pagina* RecuperaPaginaPorNome(ListaPaginas *listaPaginas, char *nome);
 
 int CheckExistencia(char *nomePagina, ListaPaginas *listaPaginas);
+
+void ImprimePagina(ListaPaginas *listaPaginas, ListaContribuicoes *listaContribuicoes, ListaLinks *listaLinks, ListaEditores *listaEditores, char *nomePagina);
+
+#endif /*PAGINA_H_*/

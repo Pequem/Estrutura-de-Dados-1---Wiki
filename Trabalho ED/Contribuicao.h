@@ -21,3 +21,5 @@ void RetiraContribuicoesPorPagina(Pagina *pagina, ListaContribuicoes *listaContr
 void FimContribuicoes(ListaContribuicoes *lista);
 
 void RetiraContribuicao(ListaContribuicoes *listaContribuicoes,char *nomeContribuicao);
+
+char* ContribuicoesParaStringPorPagina(ListaContribuicoes *listaContribuicoes, Pagina *pagina);
