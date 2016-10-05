@@ -85,6 +85,11 @@ int main(int argc, char *argv[])
             fscanf(file, "%s %s", nomePagina, nomePagina2);
             CheckLink(listaLinks, listaPaginas, nomePagina, nomePagina2);
         }
+        
+        if (strcmp(funcao, "IMPRIMEWIKED") == 0)
+        {
+            ImprimeWiked(listaPaginas, listaEditores, listaContribuicoes, listaLinks);
+        }
     }
     while (strcmp(funcao,"FIM") != 0);
     

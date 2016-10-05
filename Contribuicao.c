@@ -94,18 +94,20 @@ void ImprimeTextos(ListaContribuicoes *listaContribuicoes, char *nomePagina, FIL
     
     while (contribuicao != NULL)
     {
-        FILE *arquivo = fopen(contribuicao->nomeContribuicao, "r");
-        
-        if (arquivo)
-        {
-            fprintf(file, "-------- %s (%s) --------\n\n", contribuicao->nomeContribuicao, RecuperaNomeEditor(contribuicao->editor));
+        if (strcmp(RecuperaNomePagina(contribuicao->pagina), nomePagina) == 0)    
+        {    FILE *arquivo = fopen(contribuicao->nomeContribuicao, "r");
             
-            while ((c = getc(arquivo)) != EOF)
-                fprintf(file, "%c", c);
-            
-            fprintf(file, "\n\n");
-            
-            fclose(arquivo);
+            if (arquivo)
+            {
+                fprintf(file, "-------- %s (%s) --------\n\n", contribuicao->nomeContribuicao, RecuperaNomeEditor(contribuicao->editor));
+                
+                while ((c = getc(arquivo)) != EOF)
+                    fprintf(file, "%c", c);
+                
+                fprintf(file, "\n\n");
+                
+                fclose(arquivo);
+            }
         }
         
         contribuicao = contribuicao->Prox;

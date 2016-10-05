@@ -69,4 +69,10 @@ char *RecuperaNomePagina(Pagina *pagina);
 */
 char *RecuperaArquivoPagina(Pagina *pagina);
 
+/* CRIA UM ARQUIVO COM AS INFORMACOES DE TODAS AS PAGINAS
+* Inputs: Lista de paginas, lista de editores, lista de contribuicoes e lista de links
+* Outputs: Nenhum
+*/
+void ImprimeWiked(ListaPaginas *listaP, ListaEditores *listaE, ListaContribuicoes *listaC, ListaLinks *listaL);
+
 #endif

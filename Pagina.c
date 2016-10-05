@@ -155,6 +155,29 @@ void ImprimePagina(char *nomePagina, ListaPaginas *listaP, ListaEditores *listaE
     return;
 }
 
+void ImprimeWiked(ListaPaginas *listaP, ListaEditores *listaE, ListaContribuicoes *listaC, ListaLinks *listaL)
+{
+    FILE *file = fopen("wiked.txt", "w");
+    
+    Pagina *pagina = listaP->Primeiro;
+    
+    while (pagina != NULL)
+    {
+        fprintf(file, "%s\n\n", pagina->nomePagina);
+        fprintf(file, "--> Historico de contribuicoes\n");
+        
+        ImprimeHistorico(listaC, pagina->nomePagina, file);
+        ImprimeLinks(listaL, pagina->nomePagina, file);
+        ImprimeTextos(listaC, pagina->nomePagina, file);
+        
+        pagina = pagina->Prox;
+    }
+    
+    fclose(file);
+    
+    return;
+}
+
 Pagina* RecuperaPaginaPorNome(ListaPaginas *listaPaginas, char *nome)
 {
     Pagina *pagina;
