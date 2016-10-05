@@ -126,6 +126,10 @@ void ImprimeTextos(ListaContribuicoes *listaContribuicoes, char *nomePagina, FIL
                 fprintf(file, "\n\n");
                 
                 fclose(arquivo);
+            }else
+            {
+                printf("ERRO: O ARQUIVO DA CONTRIBUICAO %s NAO FOI ENCONTRADO\n", contribuicao->nomeContribuicao);
+                printLog3("ERRO: O ARQUIVO DA CONTRIBUICAO",contribuicao->nomeContribuicao,"NAO FOI ENCONTRADO!");
             }
         }
         

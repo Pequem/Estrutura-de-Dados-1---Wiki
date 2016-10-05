@@ -34,8 +34,9 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}" entrada.txt
 </runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" "C:\Users\rodri\Documents\Visual Studio 2015\Projects\Trabalho ED\dist\Debug\Cygwin-Windows\entrada.txt"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" "entrada.txt"</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" "C:\Users\rodri\Documents\Visual Studio 2015\Projects\Trabalho ED\dist\Debug\Cygwin-Windows\entrada.txt"</runcommand>
+        <runcommand>"${OUTPUT_PATH}" "entrada.txt"</runcommand>
         <rundir></rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>

@@ -1,5 +1,5 @@
 *.txt
 *.exe
-nbproject/*
-dist/*
-build/*
+nbproject/
+dist/
+build/

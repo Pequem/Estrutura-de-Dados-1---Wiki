@@ -43,3 +43,4 @@ A mecânica não se limita à análise de partículas discretas, mas estuda também me
 É considerada a divisão base da física, pois as outras divisões são derivadas dela. Seu escopo continua sendo o estudo dos entes fundamentais da física: espaço, tempo, matéria e energia. De suas relações e consequências, surgem outros conceitos, como as leis de Newton, posição, dimensão, invariância de Galileu, velocidade, aceleração, força, torque, momento linear, momento angular, energia mecânica, trabalho, potência, massa, inércia, momento de inércia, referencial, entre outros.[105]
 
 
+

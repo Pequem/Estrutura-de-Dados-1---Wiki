@@ -9,3 +9,9 @@ ERRO: não existe a pagina Psicologia
 HA CAMINHO DA PAGINA  UFES  PARA  Fisica
 NAO HA CAMINHO DA PAGINA Fisica PARA UFES
 ERRO: não existe a pagina Psicologia
+ERRO: não existe a pagina Psicologia
+HA CAMINHO DA PAGINA  UFES  PARA  Fisica
+NAO HA CAMINHO DA PAGINA Fisica PARA UFES
+ERRO: não existe a pagina Psicologia
+HA CAMINHO DA PAGINA  UFES  PARA  Fisica
+NAO HA CAMINHO DA PAGINA Fisica PARA UFES
