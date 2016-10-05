@@ -29,12 +29,10 @@ ListaEditores* InsereEditor(char *nomeEditor, ListaEditores *lista)
 {
     Editor *aux;
 
-    if (lista->Primeiro == NULL)
-        return NULL;
-
     if (strcmp(lista->Primeiro->nomeEditor, nomeEditor) == 0){
         printf("ERRO: EDITOR JA EXISTE!\n");
         printLog3("ERRO: EDITOR",nomeEditor,"JA EXISTE");
+        return;
     }
 
     aux = lista->Primeiro;
@@ -52,6 +50,7 @@ ListaEditores* InsereEditor(char *nomeEditor, ListaEditores *lista)
     if (aux != NULL){
         printf("ERRO: EDITOR JA EXISTE!\n");
         printLog3("ERRO: EDITOR",nomeEditor,"JA EXISTE");
+        return;
     }
     
     Editor *novoEditor = (Editor*)malloc(sizeof(Editor));

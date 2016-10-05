@@ -92,8 +92,8 @@ void RetiraContribuicao(ListaContribuicoes *listaContribuicoes, ListaPaginas *li
     }
     
     if(aux == NULL){
-        printf("ERRO CONTRIBUICAO NAO EXISTE!");
-        printLog3("ERRO CONTRIBUICAO",nomeContribuicao," NAO EXISTE!");
+        printf("ERRO: CONTRIBUICAO NAO EXISTE!");
+        printLog3("ERRO: CONTRIBUICAO",nomeContribuicao," NAO EXISTE!");
     }
 
     return;
@@ -142,9 +142,9 @@ void ImprimeHistorico(ListaContribuicoes *listaContribuicoes, char *nomePagina, 
         if (strcmp(RecuperaNomePagina(contribuicao->pagina), nomePagina) == 0)
         {
             if(contribuicao->excluida){
-            fprintf(file, "%s %s (EXCLUIDA)\n", RecuperaNomeEditor(contribuicao->editor), contribuicao->nomeContribuicao);    
+                fprintf(file, "%s %s (EXCLUIDA)\n", RecuperaNomeEditor(contribuicao->editor), contribuicao->nomeContribuicao);    
             }else{
-            fprintf(file, "%s %s\n", RecuperaNomeEditor(contribuicao->editor), contribuicao->nomeContribuicao);
+                fprintf(file, "%s %s\n", RecuperaNomeEditor(contribuicao->editor), contribuicao->nomeContribuicao);
             }
         }
         
