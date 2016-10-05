@@ -75,24 +75,30 @@ void RetiraContribuicao(ListaContribuicoes *listaContribuicoes, ListaPaginas *li
 {
     Contribuicao *aux;
     Editor *editor = RecuperaEditorPorNome(nomeEditor, listaEditores);
-    Pagina *pag = RecuperaPaginaPorNome(listaPaginas, nomePagina);
     aux = listaContribuicoes->Primeiro;
 
     while (aux != NULL)
     {
         if (strcmp(aux->nomeContribuicao,nomeContribuicao) == 0)
-            if(editor == aux->editor){
+        {
+            if(editor == aux->editor)
+            {
                 aux->excluida = 1;
                 break;
-            }else{
+            }
+            
+            else
+            {
                 printf("ERRO: EDITOR %s NAO PODE RETIRAR A CONTRIBUICAO %s",RecuperaNomeEditor(editor), aux->nomeContribuicao);
                 printLog4("ERRO: EDITOR",RecuperaNomeEditor(editor),"NAO PODE RETIRAR A CONTRIBUICAO", aux->nomeContribuicao);
             }
-            
+        }
+        
         aux = aux->Prox;
     }
     
-    if(aux == NULL){
+    if(aux == NULL)
+    {
         printf("ERRO: CONTRIBUICAO NAO EXISTE!");
         printLog3("ERRO: CONTRIBUICAO",nomeContribuicao," NAO EXISTE!");
     }
@@ -109,12 +115,8 @@ void ImprimeTextos(ListaContribuicoes *listaContribuicoes, char *nomePagina, FIL
     
     while (contribuicao != NULL)
     {
-        if (strcmp(RecuperaNomePagina(contribuicao->pagina), nomePagina) == 0)    
+        if ((strcmp(RecuperaNomePagina(contribuicao->pagina), nomePagina) == 0 )&& !contribuicao->excluida)    
         {    
-            if(contribuicao->excluida){
-                contribuicao = contribuicao->Prox;
-                continue;
-            }
             FILE *arquivo = fopen(contribuicao->nomeContribuicao, "r");
             
             if (arquivo)
@@ -127,10 +129,6 @@ void ImprimeTextos(ListaContribuicoes *listaContribuicoes, char *nomePagina, FIL
                 fprintf(file, "\n\n");
                 
                 fclose(arquivo);
-            }else
-            {
-                printf("ERRO: O ARQUIVO DA CONTRIBUICAO %s NAO FOI ENCONTRADO\n", contribuicao->nomeContribuicao);
-                printLog3("ERRO: O ARQUIVO DA CONTRIBUICAO",contribuicao->nomeContribuicao,"NAO FOI ENCONTRADO!");
             }
         }
         
@@ -146,11 +144,8 @@ void ImprimeHistorico(ListaContribuicoes *listaContribuicoes, char *nomePagina, 
     {
         if (strcmp(RecuperaNomePagina(contribuicao->pagina), nomePagina) == 0)
         {
-            if(contribuicao->excluida){
-                fprintf(file, "%s %s (EXCLUIDA)\n", RecuperaNomeEditor(contribuicao->editor), contribuicao->nomeContribuicao);    
-            }else{
+            if (!contribuicao->excluida)
                 fprintf(file, "%s %s\n", RecuperaNomeEditor(contribuicao->editor), contribuicao->nomeContribuicao);
-            }
         }
         
         contribuicao = contribuicao->Prox;
