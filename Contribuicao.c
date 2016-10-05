@@ -36,12 +36,14 @@ void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuic
     if (editor == NULL)
     {
         printf("ERRO: EDITOR NAO EXISTE!\n");
+        printLog3("ERRO: EDITOR ",nomeEditor," NAO EXISTE!");
         return;
     }
     
     if (pagina == NULL)
     {
         printf("ERRO: PAGINA NAO EXISTE!\n");
+        printLog3("ERRO: PAGINA",nomePagina," NAO EXISTE!");
         return;
     }
 
@@ -68,18 +70,30 @@ void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuic
     return;
 }
 
-void RetiraContribuicao(ListaContribuicoes *listaContribuicoes,char *nomeContribuicao)
+void RetiraContribuicao(ListaContribuicoes *listaContribuicoes, ListaPaginas *listaPaginas, ListaEditores *listaEditores, char *nomePagina, char* nomeEditor, char *nomeContribuicao)
 {
     Contribuicao *aux;
-
+    Editor *editor = RecuperaEditorPorNome(nomeEditor, listaEditores);
+    Pagina *pag = RecuperaPaginaPorNome(listaPaginas, nomePagina);
     aux = listaContribuicoes->Primeiro;
 
     while (aux != NULL)
     {
         if (strcmp(aux->nomeContribuicao,nomeContribuicao) == 0)
-            aux->excluida = 1;
+            if(editor == aux->editor){
+                aux->excluida = 1;
+                break;
+            }else{
+                printf("ERRO: EDITOR %s NAO PODE RETIRAR A CONTRIBUICAO %s",RecuperaNomeEditor(editor), aux->nomeContribuicao);
+                printLog4("ERRO: EDITOR",RecuperaNomeEditor(editor),"NAO PODE RETIRAR A CONTRIBUICAO", aux->nomeContribuicao);
+            }
             
         aux = aux->Prox;
+    }
+    
+    if(aux == NULL){
+        printf("ERRO CONTRIBUICAO NAO EXISTE!");
+        printLog3("ERRO CONTRIBUICAO",nomeContribuicao," NAO EXISTE!");
     }
 
     return;
@@ -95,7 +109,12 @@ void ImprimeTextos(ListaContribuicoes *listaContribuicoes, char *nomePagina, FIL
     while (contribuicao != NULL)
     {
         if (strcmp(RecuperaNomePagina(contribuicao->pagina), nomePagina) == 0)    
-        {    FILE *arquivo = fopen(contribuicao->nomeContribuicao, "r");
+        {    
+            if(contribuicao->excluida){
+                contribuicao = contribuicao->Prox;
+                continue;
+            }
+            FILE *arquivo = fopen(contribuicao->nomeContribuicao, "r");
             
             if (arquivo)
             {
@@ -122,7 +141,11 @@ void ImprimeHistorico(ListaContribuicoes *listaContribuicoes, char *nomePagina, 
     {
         if (strcmp(RecuperaNomePagina(contribuicao->pagina), nomePagina) == 0)
         {
+            if(contribuicao->excluida){
+            fprintf(file, "%s %s (EXCLUIDA)\n", RecuperaNomeEditor(contribuicao->editor), contribuicao->nomeContribuicao);    
+            }else{
             fprintf(file, "%s %s\n", RecuperaNomeEditor(contribuicao->editor), contribuicao->nomeContribuicao);
+            }
         }
         
         contribuicao = contribuicao->Prox;

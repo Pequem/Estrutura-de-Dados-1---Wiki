@@ -5,6 +5,7 @@
 #include "Editor.h"
 #include "Contribuicao.h"
 #include "Link.h"
+#include "Log.h"
 
 struct link
 {
@@ -109,14 +110,16 @@ void CheckLink(ListaLinks * listaLinks, ListaPaginas * listaPaginas, char * nome
     {
         if ((aux->de == de) && (aux->para == para))
         {
-            printf("CAMINHA VALIDO\n");
+            printf("HA CAMINHO DA PAGINA %s PARA %s\n",nomeDe,nomePara);
+            printLog4("HA CAMINHO DA PAGINA ",nomeDe," PARA ",nomePara);
             return;
         }
 		
         aux = aux->Prox;
     }
     
-    printf("CAMINHO INVALIDO\n");
+    printf("NAO HA CAMINHO DA PAGINA %s PARA %s \n",nomeDe,nomePara);
+    printLog4("NAO HA CAMINHO DA PAGINA",nomeDe,"PARA",nomePara);
     
     return;
 }

@@ -33,7 +33,7 @@ void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuic
 * Inputs: Lista de contribuicoes e nome da contribuicao
 * Outputs: Nenhum
 */
-void RetiraContribuicao(ListaContribuicoes *listaContribuicoes, char *nomeContribuicao);
+void RetiraContribuicao(ListaContribuicoes *listaContribuicoes, ListaPaginas *listaPaginas, ListaEditores *listaEditores, char *nomePagina, char* nomeEditor, char *nomeContribuicao);
 
 /* RETIRA TODAS AS CONTRIBUICOES DE DADA PAGINA
 * Inputs: Pagina e lista de contribuicoes

@@ -76,8 +76,8 @@ int main(int argc, char *argv[])
 		
         if (strcmp(funcao, "RETIRACONTRIBUICAO") == 0)
         {
-            fscanf(file, "%s", nomeContribuicao);
-            RetiraContribuicao(listaContribuicoes, nomeContribuicao);
+            fscanf(file, "%s %s %s", nomePagina, nomeEditor, nomeContribuicao);
+            RetiraContribuicao(listaContribuicoes, listaPaginas, listaEditores, nomePagina, nomeEditor, nomeContribuicao);
         }
 		
         if (strcmp(funcao, "CAMINHO") == 0)
@@ -100,5 +100,5 @@ int main(int argc, char *argv[])
     
     fclose(file);
     
-    return 3;            
+    return 0;            
 }

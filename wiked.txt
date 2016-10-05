@@ -1,0 +1,36 @@
+UFES
+
+--> Historico de contribuicoes
+Joao c6.txt
+Joao c7.txt
+Ana c8.txt
+
+--> Links
+Fisica fisica.txt
+Artes artes.txt
+
+--> Textos
+
+Artes
+
+--> Historico de contribuicoes
+Maria c4.txt
+Ana c5.txt
+
+--> Links
+Fisica fisica.txt
+
+--> Textos
+
+Fisica
+
+--> Historico de contribuicoes
+Pedro c1.txt
+Maria c2.txt
+Pedro c3.txt
+
+--> Links
+Artes artes.txt
+
+--> Textos
+

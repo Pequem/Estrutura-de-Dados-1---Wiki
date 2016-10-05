@@ -27,6 +27,33 @@ ListaEditores* InicializaListaEditores()
 
 ListaEditores* InsereEditor(char *nomeEditor, ListaEditores *lista)
 {
+    Editor *aux;
+
+    if (lista->Primeiro == NULL)
+        return NULL;
+
+    if (strcmp(lista->Primeiro->nomeEditor, nomeEditor) == 0){
+        printf("ERRO: EDITOR JA EXISTE!\n");
+        printLog3("ERRO: EDITOR",nomeEditor,"JA EXISTE");
+    }
+
+    aux = lista->Primeiro;
+
+    for (;;)
+    {
+        aux = aux->Prox;
+        
+        if (aux == NULL)
+            break;
+        
+        if (strcmp(aux->nomeEditor, nomeEditor) == 0)
+            break;
+    }
+    if (aux != NULL){
+        printf("ERRO: EDITOR JA EXISTE!\n");
+        printLog3("ERRO: EDITOR",nomeEditor,"JA EXISTE");
+    }
+    
     Editor *novoEditor = (Editor*)malloc(sizeof(Editor));
     novoEditor->Prox = NULL;
 
@@ -63,8 +90,10 @@ ListaEditores* RetiraEditor(char *nomeEditor, ListaEditores *lista)
     }
 
     //CASO O EDITOR NAO EXISTA
-    if (atual == NULL)
+    if (atual == NULL){
         printf("ERRO: EDITOR NAO EXISTE!\n");
+        printLog3("ERRO: EDITOR",nomeEditor,"NAO EXISTE");
+    }
 
     //EDITOR A SER RETIRADO EH O PRIMEIRO DA LISTA
     else if (atual == lista->Primeiro)
@@ -121,7 +150,10 @@ Editor* RecuperaEditorPorNome(char *nome, ListaEditores *lista)
         if (strcmp(aux->nomeEditor, nome) == 0)
             break;
     }
-
+    if (aux == NULL){
+        printf("ERRO: EDITOR NAO EXISTE!\n");
+        printLog3("ERRO: EDITOR",nome,"NAO EXISTE");
+    }
     return aux;
 }
 

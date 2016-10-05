@@ -56,7 +56,7 @@ ListaPaginas* InserePagina(char *nomePagina, char *nomeArquivo, ListaPaginas *li
     if (CheckExistencia(nomePagina, lista))
     {
         printf("Pagina ja existe\n");
-        //printLog("Pagina", nomePagina, "ja existe");
+        printLog3("Pagina", nomePagina, "ja existe");
         
         return lista;
     }
@@ -106,8 +106,8 @@ ListaPaginas* RetiraPagina(char *nomePagina, ListaPaginas *lista, ListaLinks *li
     //CASO A PAGINA NAO EXISTA
     if (atual == NULL)
     {
-        printf("ERRO: PAGINA NAO EXISTE!\n");
-        //printLog("ERRO: PAGINA",nomePagina,"NAO EXISTE!");
+        printf("ERRO: não existe a pagina %s\n",nomePagina);
+        printLog2("ERRO: não existe a pagina",nomePagina);
         return lista;
     }
 
