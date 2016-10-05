@@ -4,6 +4,7 @@
 #include "Pagina.h"
 #include "Editor.h"
 #include "Contribuicao.h"
+#include "Log.h"
 
 struct pagina
 {
