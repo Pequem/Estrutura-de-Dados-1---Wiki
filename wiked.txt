@@ -15,7 +15,7 @@ Artes
 
 --> Historico de contribuicoes
 Maria c4.txt
-Ana c5.txt
+Ana c5.txt (EXCLUIDA)
 
 --> Links
 Fisica fisica.txt

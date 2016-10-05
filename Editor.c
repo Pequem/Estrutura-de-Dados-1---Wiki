@@ -29,28 +29,30 @@ ListaEditores* InsereEditor(char *nomeEditor, ListaEditores *lista)
 {
     Editor *aux;
 
-    if (strcmp(lista->Primeiro->nomeEditor, nomeEditor) == 0){
-        printf("ERRO: EDITOR JA EXISTE!\n");
-        printLog3("ERRO: EDITOR",nomeEditor,"JA EXISTE");
-        return;
-    }
+    if(lista->Primeiro != NULL){
+        if (strcmp(lista->Primeiro->nomeEditor, nomeEditor) == 0){
+            printf("ERRO: EDITOR JA EXISTE!\n");
+            printLog3("ERRO: EDITOR",nomeEditor,"JA EXISTE");
+            return;
+        }
 
-    aux = lista->Primeiro;
+        aux = lista->Primeiro;
 
-    for (;;)
-    {
-        aux = aux->Prox;
-        
-        if (aux == NULL)
-            break;
-        
-        if (strcmp(aux->nomeEditor, nomeEditor) == 0)
-            break;
-    }
-    if (aux != NULL){
-        printf("ERRO: EDITOR JA EXISTE!\n");
-        printLog3("ERRO: EDITOR",nomeEditor,"JA EXISTE");
-        return;
+        for (;;)
+        {
+            aux = aux->Prox;
+
+            if (aux == NULL)
+                break;
+
+            if (strcmp(aux->nomeEditor, nomeEditor) == 0)
+                break;
+        }
+        if (aux != NULL){
+            printf("ERRO: EDITOR JA EXISTE!\n");
+            printLog3("ERRO: EDITOR",nomeEditor,"JA EXISTE");
+            return;
+        }
     }
     
     Editor *novoEditor = (Editor*)malloc(sizeof(Editor));
