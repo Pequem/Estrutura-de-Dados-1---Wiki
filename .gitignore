@@ -1,8 +1,1 @@
 *.txt
-*.exe
-*.stackdump
-*.o
-*.d
-nbproject\
-dist\
-build\
