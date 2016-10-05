@@ -129,6 +129,10 @@ void ImprimeTextos(ListaContribuicoes *listaContribuicoes, char *nomePagina, FIL
                 fprintf(file, "\n\n");
                 
                 fclose(arquivo);
+            }else
+            {
+                printf("ERRO: O ARQUIVO DA CONTRIBUICAO %s NAO FOI ENCONTRADO\n", contribuicao->nomeContribuicao); 
+                printLog3("ERRO: O ARQUIVO DA CONTRIBUICAO",contribuicao->nomeContribuicao,"NAO FOI ENCONTRADO!"); 
             }
         }
         
@@ -145,7 +149,12 @@ void ImprimeHistorico(ListaContribuicoes *listaContribuicoes, char *nomePagina, 
         if (strcmp(RecuperaNomePagina(contribuicao->pagina), nomePagina) == 0)
         {
             if (!contribuicao->excluida)
+            {
                 fprintf(file, "%s %s\n", RecuperaNomeEditor(contribuicao->editor), contribuicao->nomeContribuicao);
+            }else
+            {
+                fprintf(file, "%s %s(EXCLUIDA)\n", RecuperaNomeEditor(contribuicao->editor), contribuicao->nomeContribuicao);
+            }
         }
         
         contribuicao = contribuicao->Prox;
