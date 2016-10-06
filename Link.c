@@ -35,6 +35,9 @@ void InsereLink(ListaLinks * lista, ListaPaginas *listaPaginas, char *deNome, ch
     l->de = RecuperaPaginaPorNome(listaPaginas, deNome);;
     l->para = RecuperaPaginaPorNome(listaPaginas, paraNome);
     l->Prox = NULL;
+    
+    if (l->de == l->para)
+        return;
 
     if (l->de == NULL || l->para == NULL)
     {

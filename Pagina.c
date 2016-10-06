@@ -134,6 +134,8 @@ ListaPaginas* RetiraPagina(char *nomePagina, ListaPaginas *lista, ListaLinks *li
 
 void ImprimePagina(char *nomePagina, ListaPaginas *listaP, ListaEditores *listaE, ListaContribuicoes *listaC, ListaLinks *listaL)
 {
+    printf("Imprime Pagina\n");
+    
     if (CheckExistencia(nomePagina, listaP) == 0)
     {
         printf("Pagina requisitada (%s) nao existe!\n", nomePagina);
@@ -143,6 +145,9 @@ void ImprimePagina(char *nomePagina, ListaPaginas *listaP, ListaEditores *listaE
     Pagina *pagina = RecuperaPaginaPorNome(listaP, nomePagina);
     
     FILE *file = fopen(pagina->nomeArquivo, "w");
+    
+    if (file)
+        printf("Arquivo criado\n");
     
     fprintf(file, "%s\n\n", nomePagina);
     fprintf(file, "--> Historico de contribuicoes\n");
