@@ -20,36 +20,11 @@ struct listaPaginas
 
 ListaPaginas* InicializaListaPaginas()
 {
+    // Criando lista vazia
     ListaPaginas *lista = (ListaPaginas*)malloc(sizeof(ListaPaginas));
     lista->Primeiro = NULL;
 
     return lista;
-}
-
-int CheckExistencia(char *nomePagina, ListaPaginas *listaPaginas)
-{
-    Pagina *aux;
-    
-    if (listaPaginas->Primeiro == NULL)
-        return 0;
-        
-    if (strcmp(listaPaginas->Primeiro->nomePagina, nomePagina) == 0)
-        return 1;
-
-    aux = listaPaginas->Primeiro;
-
-    for(;;)
-    {
-        aux = aux->Prox;
-        
-        if (aux == NULL)
-            break;
-        
-        if (strcmp(aux->nomePagina, nomePagina) == 0)
-            return 1;
-    }
-	
-    return 0;
 }
 
 ListaPaginas* InserePagina(char *nomePagina, char *nomeArquivo, ListaPaginas *lista)
@@ -132,6 +107,32 @@ ListaPaginas* RetiraPagina(char *nomePagina, ListaPaginas *lista, ListaLinks *li
     return lista;
 }
 
+int CheckExistencia(char *nomePagina, ListaPaginas *listaPaginas)
+{
+    Pagina *aux;
+    
+    if (listaPaginas->Primeiro == NULL)
+        return 0;
+        
+    if (strcmp(listaPaginas->Primeiro->nomePagina, nomePagina) == 0)
+        return 1;
+
+    aux = listaPaginas->Primeiro;
+
+    for(;;)
+    {
+        aux = aux->Prox;
+        
+        if (aux == NULL)
+            break;
+        
+        if (strcmp(aux->nomePagina, nomePagina) == 0)
+            return 1;
+    }
+	
+    return 0;
+}
+
 void ImprimePagina(char *nomePagina, ListaPaginas *listaP, ListaEditores *listaE, ListaContribuicoes *listaC, ListaLinks *listaL)
 {
     printf("Imprime Pagina\n");
@@ -155,29 +156,6 @@ void ImprimePagina(char *nomePagina, ListaPaginas *listaP, ListaEditores *listaE
     ImprimeHistorico(listaC, nomePagina, file);
     ImprimeLinks(listaL, nomePagina, file);
     ImprimeTextos(listaC, nomePagina, file);
-    
-    fclose(file);
-    
-    return;
-}
-
-void ImprimeWiked(ListaPaginas *listaP, ListaEditores *listaE, ListaContribuicoes *listaC, ListaLinks *listaL)
-{
-    FILE *file = fopen("wiked.txt", "w");
-    
-    Pagina *pagina = listaP->Primeiro;
-    
-    while (pagina != NULL)
-    {
-        fprintf(file, "%s\n\n", pagina->nomePagina);
-        fprintf(file, "--> Historico de contribuicoes\n");
-        
-        ImprimeHistorico(listaC, pagina->nomePagina, file);
-        ImprimeLinks(listaL, pagina->nomePagina, file);
-        ImprimeTextos(listaC, pagina->nomePagina, file);
-        
-        pagina = pagina->Prox;
-    }
     
     fclose(file);
     
@@ -216,6 +194,29 @@ char* RecuperaNomePagina(Pagina *pagina)
 char* RecuperaArquivoPagina(Pagina *pagina)
 {
     return (pagina->nomeArquivo);
+}
+
+void ImprimeWiked(ListaPaginas *listaP, ListaEditores *listaE, ListaContribuicoes *listaC, ListaLinks *listaL)
+{
+    FILE *file = fopen("wiked.txt", "w");
+    
+    Pagina *pagina = listaP->Primeiro;
+    
+    while (pagina != NULL)
+    {
+        fprintf(file, "%s\n\n", pagina->nomePagina);
+        fprintf(file, "--> Historico de contribuicoes\n");
+        
+        ImprimeHistorico(listaC, pagina->nomePagina, file);
+        ImprimeLinks(listaL, pagina->nomePagina, file);
+        ImprimeTextos(listaC, pagina->nomePagina, file);
+        
+        pagina = pagina->Prox;
+    }
+    
+    fclose(file);
+    
+    return;
 }
 
 void FimPaginas(ListaPaginas *lista)
