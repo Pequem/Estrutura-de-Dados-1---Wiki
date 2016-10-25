@@ -35,11 +35,6 @@ void InsereLink(ListaLinks * lista, ListaPaginas *listaPaginas, char *deNome, ch
     l->de = RecuperaPaginaPorNome(listaPaginas, deNome);;
     l->para = RecuperaPaginaPorNome(listaPaginas, paraNome);
     l->Prox = NULL;
-    
-    if (l->de == l->para){
-        printLog2("ERRO","UMA PAGINA NAO PODE APONTAR PARA ELA MESMA");
-        return;
-    }
 
     if (l->de == NULL)
     {
@@ -50,6 +45,34 @@ void InsereLink(ListaLinks * lista, ListaPaginas *listaPaginas, char *deNome, ch
     if(l->para == NULL){
         printLog3("ERRO: A PAGINA",paraNome,"NAO EXISTE");
         return;
+    }
+    
+    if (l->de == l->para){
+        printLog2("ERRO","UMA PAGINA NAO PODE APONTAR PARA ELA MESMA");
+        return;
+    }
+    
+    if(lista->Primeiro != NULL){
+        Link *aux;
+        
+        aux = lista->Primeiro;
+        
+        if(aux->de == l->de){
+            if(aux->para == l->para){
+                printLog4("ERRO: JA EXISTE O LINK DE",deNome,"PARA",paraNome);
+                return;
+            }
+        }
+        for(;;){
+                if(aux == NULL) break;
+                if(aux->de == l->de){
+                    if(aux->para == l->para){
+                        printLog4("ERRO: JA EXISTE O LINK DE",deNome,"PARA",paraNome);
+                        return;
+                    }
+                }
+                aux = aux->Prox;
+            }
     }
 
     if (lista->Primeiro == NULL)
@@ -77,10 +100,12 @@ void RemoverLink(ListaLinks * lista, Link * l)
 
     aux = lista->Primeiro;
 
-    do
+    for(;;)
     {
+        if(aux->Prox == NULL) break;
+        if(aux->Prox == l) break;
         aux = aux->Prox;
-    } while (aux->Prox != l || aux->Prox == NULL);
+    }
 	
     if (aux->Prox != NULL)
     {
@@ -116,8 +141,10 @@ void RetiraLink(ListaLinks *listaLinks,ListaPaginas *listaPaginas, char *deNome,
     
     do
     {
+        if(aux->Prox == NULL) break;
+        if((aux->de == de) && (aux->para == para)) break;
         aux = aux->Prox;
-    } while (((aux->de == de) && (aux->para == para)) || aux->Prox == NULL);
+    } while (1);
 	
     if (aux->Prox != NULL)
     {

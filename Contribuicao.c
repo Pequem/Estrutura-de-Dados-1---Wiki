@@ -46,6 +46,32 @@ void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuic
         printLog3("ERRO: PAGINA",nomePagina," NAO EXISTE!");
         return;
     }
+    
+    if(listaC->Primeiro != NULL){
+        Contribuicao *aux;
+        
+        aux = listaC->Primeiro;
+        
+        if(strcmp(aux->nomeContribuicao, nomeContribuicao) == 0){
+            printLog3("ERRO: CONTRIBUICAO",nomeContribuicao,"JA EXISTE!");
+            return;
+        }else{
+            
+            for(;;){
+                
+                if(aux == NULL) break;
+                
+                if(strcmp(aux->nomeContribuicao, nomeContribuicao) == 0) break;
+                
+                aux = aux->Prox;
+            }
+            
+            if(aux != NULL){
+                printLog3("ERRO: CONTRIBUICAO",nomeContribuicao,"JA EXISTE!");
+                return;
+            }
+        }
+    }
 
     Contribuicao *c = (Contribuicao*)malloc(sizeof(Contribuicao));
 
