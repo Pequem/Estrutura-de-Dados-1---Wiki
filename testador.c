@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
         if (strcmp(funcao, "RETIRAEDITOR")== 0)
         {
             fscanf(file, "%s", nomeEditor);
-            listaEditores = RetiraEditor(nomeEditor, listaEditores);
+            listaEditores = RetiraEditor(nomeEditor, listaEditores, listaContribuicoes);
         }
         
         if (strcmp(funcao, "INSERECONTRIBUICAO")== 0)
@@ -66,6 +66,12 @@ int main(int argc, char *argv[])
         {
             fscanf(file, "%s %s", nomePagina, nomePagina2);
             InsereLink(listaLinks, listaPaginas, nomePagina, nomePagina2);
+        }
+        
+        if (strcmp(funcao, "RETIRALINK") == 0)
+        {
+            fscanf(file, "%s %s", nomePagina, nomePagina2);
+            RetiraLink(listaLinks, listaPaginas, nomePagina, nomePagina2);
         }
 		
         if (strcmp(funcao, "IMPRIMEPAGINA") == 0)

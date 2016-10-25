@@ -1,11 +1,11 @@
 #ifndef CONTRIBUICAO_H_
 #define CONTRIBUICAO_H_
 
-#include "Editor.h"
-#include "Pagina.h"
-
 // LISTA DE CONTRIBUICOES
 typedef struct listaContribuicoes ListaContribuicoes;
+
+#include "Editor.h"
+#include "Pagina.h"
 
 /* CELULA DA LISTA DE CONTRIBUICOES
  * Campos:
@@ -45,9 +45,17 @@ void RetiraContribuicao(ListaContribuicoes *listaContribuicoes, ListaPaginas *li
 * Inputs: Pagina e lista de contribuicoes
 * Outputs: Nenhum
 * Pre-condicao: Lista e pagina existem
-* Pos-condicao: Todas as contribuicoes feitas para uma pagina sinalizadas como excuidas
+* Pos-condicao: Todas as contribuicoes feitas para uma pagina sinalizadas como excluidas
 */
-void RetiraContribuicoesPorPagina(Pagina *pagina, ListaContribuicoes *listaContribuicoes);
+void RetiraContribuicoesPorPagina(Pagina *pagina, ListaContribuicoes *listaContribuicoes, int paginaExcluida);
+
+/* RETIRA TODAS AS CONTRIBUICOES DE DADO EDITOR
+* Inputs: Editor e lista de contribuicoes
+* Outputs: Nenhum
+* Pre-condicao: Lista e editor existem
+* Pos-condicao: Todas as contribuicoes feitas para um editor excluidas
+*/
+void RetiraContribuicoesPorEditor(Editor *editor, ListaContribuicoes *listaContribuicoes);
 
 /* LIBERA ESPACO ALOCADO PELA LISTA DE CONTRIBUICOES
 * Inputs: Nome da pagina, nome do editor, nome da contribuicao e lista de editores

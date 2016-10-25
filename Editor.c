@@ -36,7 +36,7 @@ ListaEditores* InsereEditor(char *nomeEditor, ListaEditores *lista)
         {
             printf("ERRO: EDITOR JA EXISTE!\n");
             printLog3("ERRO: EDITOR",nomeEditor,"JA EXISTE");
-            return NULL;
+            return lista;
         }
 
         aux = lista->Primeiro;
@@ -56,7 +56,7 @@ ListaEditores* InsereEditor(char *nomeEditor, ListaEditores *lista)
         {
             printf("ERRO: EDITOR JA EXISTE!\n");
             printLog3("ERRO: EDITOR",nomeEditor,"JA EXISTE");
-            return NULL;
+            return lista;
         }
     }
     
@@ -80,7 +80,7 @@ ListaEditores* InsereEditor(char *nomeEditor, ListaEditores *lista)
     return lista;
 }
 
-ListaEditores* RetiraEditor(char *nomeEditor, ListaEditores *lista)
+ListaEditores* RetiraEditor(char *nomeEditor, ListaEditores *lista, ListaContribuicoes *listaContribuicoes)
 {
     Editor *atual = lista->Primeiro;
     Editor *anterior = lista->Primeiro;
@@ -105,7 +105,8 @@ ListaEditores* RetiraEditor(char *nomeEditor, ListaEditores *lista)
     else if (atual == lista->Primeiro)
     {
         lista->Primeiro = atual->Prox;
-
+        RetiraContribuicoesPorEditor(atual, listaContribuicoes);
+        
         free(atual->nomeEditor);
         free(atual);
     }
@@ -114,7 +115,8 @@ ListaEditores* RetiraEditor(char *nomeEditor, ListaEditores *lista)
     else
     {
         anterior->Prox = atual->Prox;
-
+        RetiraContribuicoesPorEditor(atual, listaContribuicoes);
+        
         free(atual->nomeEditor);
         free(atual);
     }

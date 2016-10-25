@@ -43,6 +43,14 @@ void RemoverLink(ListaLinks *lista, Link *l);
  * Inputs: Pagina e lista de links
  * Outputs: Nenhum
  * Pre-condicao: Lista e pagina existem
+ * Pos-condicao: Link retirado da lista
+ */
+void RetiraLink(ListaLinks *listaLinks,ListaPaginas *listaPaginas, char *deNome, char *paraNome);
+
+/* RETIRA LINK DA PAGINA
+ * Inputs: Pagina e lista de links
+ * Outputs: Nenhum
+ * Pre-condicao: Lista e pagina existem
  * Pos-condicao: Todos os links daquela pagina sao retirados
  */
 void RetiraLinksPorPagina(Pagina *pagina, ListaLinks *listaLinks);

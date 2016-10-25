@@ -2,3 +2,5 @@
 *.inc
 build/
 nbproject
+Makefile
+*.exe

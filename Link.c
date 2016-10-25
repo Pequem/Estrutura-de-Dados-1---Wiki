@@ -36,12 +36,19 @@ void InsereLink(ListaLinks * lista, ListaPaginas *listaPaginas, char *deNome, ch
     l->para = RecuperaPaginaPorNome(listaPaginas, paraNome);
     l->Prox = NULL;
     
-    if (l->de == l->para)
+    if (l->de == l->para){
+        printLog2("EROO","UMA PAGINA NAO PODE APONTAR PARA ELA MESMA");
         return;
+    }
 
-    if (l->de == NULL || l->para == NULL)
+    if (l->de == NULL)
     {
-        printf("ERRO: PAGINA NAO EXISTE (INSERELINK)\n");
+        printLog3("ERRO: A PAGINA",deNome,"NAO EXISTE");
+        return;
+    }
+    
+    if(l->para == NULL){
+        printLog3("ERRO: A PAGINA",paraNome,"NAO EXISTE");
         return;
     }
 
@@ -79,6 +86,26 @@ void RemoverLink(ListaLinks * lista, Link * l)
     {
         aux->Prox = aux->Prox->Prox;
         free(l);
+    }
+
+    return;
+}
+
+void RetiraLink(ListaLinks *listaLinks,ListaPaginas *listaPaginas, char *deNome, char *paraNome){
+    Link *aux;
+    Pagina *de = RecuperaPaginaPorNome(listaPaginas, deNome);
+    Pagina *para = RecuperaPaginaPorNome(listaPaginas, paraNome);
+
+    aux = listaLinks->Primeiro;
+
+    do
+    {
+        aux = aux->Prox;
+    } while (((aux->de == de) && (aux->para == para)) || aux->Prox == NULL);
+	
+    if (aux->Prox != NULL)
+    {
+        RemoverLink(listaLinks, aux);
     }
 
     return;
@@ -136,7 +163,7 @@ void RetiraLinksPorPagina(Pagina * pagina, ListaLinks *listaLinks)
     {
         prox = link->Prox;
         
-        if (link->de == pagina)
+        if ((link->de == pagina) || (link->para == pagina))
             RemoverLink(listaLinks, link);
         
         link = prox;

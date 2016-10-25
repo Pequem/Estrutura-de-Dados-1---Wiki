@@ -95,7 +95,7 @@ ListaPaginas* RetiraPagina(char *nomePagina, ListaPaginas *lista, ListaLinks *li
     else
         anterior->Prox = atual->Prox;
 	
-    RetiraContribuicoesPorPagina(atual, listaContribuicoes);
+    RetiraContribuicoesPorPagina(atual, listaContribuicoes, 1);
     RetiraLinksPorPagina(atual, listaLinks);
     
     free(atual->nomeArquivo);

@@ -1,6 +1,8 @@
 #ifndef EDITOR_H_
 #define EDITOR_H_
 
+#include "Contribuicao.h"
+
 // LISTA DE EDITORES
 typedef struct listaEditores ListaEditores;
 
@@ -28,12 +30,12 @@ ListaEditores* InicializaListaEditores();
 ListaEditores* InsereEditor(char *nomeEditor, ListaEditores* lista);
 
 /* RETIRA EDITOR DA LISTA
-* Inputs: Nome do editor
+* Inputs: Nome do editor e Listas
 * Outputs: Lista de editores atualizada
-* Pre-Condicao: Lista e editor existem
-* Pos-Condicao: Editor retirado da lista e espaco ocupado por ele liberado
+* Pre-Condicao: Listas e editor existem
+* Pos-Condicao: Editor e Contribuicoes retiradas de suas respectivas listas e espaco ocupado por ele liberado
 */
-ListaEditores* RetiraEditor(char *nomeEditor, ListaEditores *lista);
+ListaEditores* RetiraEditor(char *nomeEditor, ListaEditores *lista, ListaContribuicoes *listaContribuicoes);
 
 /* LIBERA O ESPACO ALOCADO PELA LISTA DE EDITORES
 * Inputs: Lista de editores

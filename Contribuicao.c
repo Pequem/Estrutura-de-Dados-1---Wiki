@@ -12,6 +12,7 @@ struct contribuicao
     Contribuicao *Prox;
     int excluida;
     Pagina *pagina;
+    char *nomePagina;
     Editor *editor;
 };
 
@@ -55,6 +56,9 @@ void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuic
 
     c->nomeContribuicao = (char*)malloc(sizeof(char)*(strlen(nomeContribuicao) + 1));
     strcpy(c->nomeContribuicao, nomeContribuicao);
+    
+    c->nomePagina = (char*)malloc(sizeof(char)*(strlen(nomePagina) + 1));
+    strcpy(c->nomePagina, nomePagina);
 
     c->Prox = NULL;
     c->pagina = pagina;
@@ -165,7 +169,7 @@ void ImprimeHistorico(ListaContribuicoes *listaContribuicoes, char *nomePagina, 
     return;
 }
 
-void RetiraContribuicoesPorPagina(Pagina *pagina, ListaContribuicoes *listaContribuicoes)
+void RetiraContribuicoesPorPagina(Pagina *pagina, ListaContribuicoes *listaContribuicoes, int paginaExcluida)
 {
     Contribuicao *aux;
 	
@@ -173,9 +177,47 @@ void RetiraContribuicoesPorPagina(Pagina *pagina, ListaContribuicoes *listaContr
 
     while (aux != NULL)
     {
-        if (aux->pagina == pagina)
+        if (aux->pagina == pagina){
             aux->excluida = 1;
-            
+            if(paginaExcluida){
+                aux->pagina = NULL;
+            }
+        }
+        aux = aux->Prox;
+    }
+    
+    return;
+}
+
+void RetiraContribuicoesPorEditor(Editor *editor, ListaContribuicoes *listaContribuicoes){
+    
+    Contribuicao *aux;
+    Contribuicao *aux2;
+    Contribuicao *ant;
+	
+    aux = listaContribuicoes->Primeiro;
+    ant = NULL;
+
+    while (aux != NULL)
+    {
+        if (aux->editor == editor){
+            if(aux == listaContribuicoes->Primeiro){
+                listaContribuicoes->Primeiro = aux->Prox;
+                aux2 = aux;
+                aux = aux->Prox;
+                free(aux2->nomeContribuicao);
+                free(aux2);
+                continue;
+            }else{
+                ant->Prox = aux->Prox;
+                aux2 = aux;
+                aux = aux->Prox;
+                free(aux2->nomeContribuicao);
+                free(aux2);
+                continue;
+            }
+        }
+        ant = aux;
         aux = aux->Prox;
     }
     
@@ -194,6 +236,7 @@ void FimContribuicoes(ListaContribuicoes * lista)
         prox = aux->Prox;
 		
         free(aux->nomeContribuicao);
+        free(aux->nomePagina);
         free(aux);
         aux = prox;
     }while (prox != NULL);
