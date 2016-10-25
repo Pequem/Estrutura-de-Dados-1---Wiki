@@ -37,7 +37,7 @@ void InsereLink(ListaLinks * lista, ListaPaginas *listaPaginas, char *deNome, ch
     l->Prox = NULL;
     
     if (l->de == l->para){
-        printLog2("EROO","UMA PAGINA NAO PODE APONTAR PARA ELA MESMA");
+        printLog2("ERRO","UMA PAGINA NAO PODE APONTAR PARA ELA MESMA");
         return;
     }
 
@@ -96,8 +96,24 @@ void RetiraLink(ListaLinks *listaLinks,ListaPaginas *listaPaginas, char *deNome,
     Pagina *de = RecuperaPaginaPorNome(listaPaginas, deNome);
     Pagina *para = RecuperaPaginaPorNome(listaPaginas, paraNome);
 
+    if (de == NULL)
+    {
+        printLog3("ERRO: A PAGINA",deNome,"NAO EXISTE");
+        return;
+    }
+    
+    if(para == NULL){
+        printLog3("ERRO: A PAGINA",paraNome,"NAO EXISTE");
+        return;
+    }
+    
     aux = listaLinks->Primeiro;
 
+    if((aux->de == de) && (aux->para == para)){
+        RemoverLink(listaLinks, aux);
+        return;
+    }
+    
     do
     {
         aux = aux->Prox;
@@ -106,6 +122,10 @@ void RetiraLink(ListaLinks *listaLinks,ListaPaginas *listaPaginas, char *deNome,
     if (aux->Prox != NULL)
     {
         RemoverLink(listaLinks, aux);
+    }
+    else
+    {
+        printLog4("ERRO: NAO EXISTE LINK DE",deNome,"PARA",paraNome);
     }
 
     return;
@@ -136,11 +156,21 @@ void CheckLink(ListaLinks * listaLinks, ListaPaginas * listaPaginas, char * nome
     Pagina *de = RecuperaPaginaPorNome(listaPaginas, nomeDe);
     Pagina *para = RecuperaPaginaPorNome(listaPaginas, nomePara);
 
+    if (de == NULL)
+    {
+        printLog3("ERRO: A PAGINA",nomeDe,"NAO EXISTE");
+        return;
+    }
+    
+    if(para == NULL){
+        printLog3("ERRO: A PAGINA",nomePara,"NAO EXISTE");
+        return;
+    }
+    
     while (aux != NULL)
     {
         if ((aux->de == de) && (aux->para == para))
         {
-            printf("HA CAMINHO DA PAGINA %s PARA %s\n",nomeDe,nomePara);
             printLog4("HA CAMINHO DA PAGINA ",nomeDe," PARA ",nomePara);
             return;
         }
@@ -148,7 +178,6 @@ void CheckLink(ListaLinks * listaLinks, ListaPaginas * listaPaginas, char * nome
         aux = aux->Prox;
     }
     
-    printf("NAO HA CAMINHO DA PAGINA %s PARA %s \n",nomeDe,nomePara);
     printLog4("NAO HA CAMINHO DA PAGINA",nomeDe,"PARA",nomePara);
     
     return;

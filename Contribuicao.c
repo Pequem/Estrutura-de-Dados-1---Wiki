@@ -37,14 +37,12 @@ void InsereContribuicao(char *nomePagina, char *nomeEditor, char *nomeContribuic
 
     if (editor == NULL)
     {
-        printf("ERRO: EDITOR NAO EXISTE!\n");
         printLog3("ERRO: EDITOR ",nomeEditor," NAO EXISTE!");
         return;
     }
     
     if (pagina == NULL)
     {
-        printf("ERRO: PAGINA NAO EXISTE!\n");
         printLog3("ERRO: PAGINA",nomePagina," NAO EXISTE!");
         return;
     }
@@ -81,6 +79,11 @@ void RetiraContribuicao(ListaContribuicoes *listaContribuicoes, ListaPaginas *li
     Editor *editor = RecuperaEditorPorNome(nomeEditor, listaEditores);
     aux = listaContribuicoes->Primeiro;
 
+    if(editor == NULL){
+        printLog3("ERRO: EDITOR",nomeEditor,"NAO EXISTE");
+        return;
+    }
+    
     while (aux != NULL)
     {
         if (strcmp(aux->nomeContribuicao,nomeContribuicao) == 0)
@@ -88,14 +91,13 @@ void RetiraContribuicao(ListaContribuicoes *listaContribuicoes, ListaPaginas *li
             if(editor == aux->editor)
             {
                 aux->excluida = 1;
-                break;
             }
             
             else
             {
-                printf("ERRO: EDITOR %s NAO PODE RETIRAR A CONTRIBUICAO %s",RecuperaNomeEditor(editor), aux->nomeContribuicao);
                 printLog4("ERRO: EDITOR",RecuperaNomeEditor(editor),"NAO PODE RETIRAR A CONTRIBUICAO", aux->nomeContribuicao);
             }
+            break;
         }
         
         aux = aux->Prox;
@@ -103,7 +105,6 @@ void RetiraContribuicao(ListaContribuicoes *listaContribuicoes, ListaPaginas *li
     
     if(aux == NULL)
     {
-        printf("ERRO: CONTRIBUICAO NAO EXISTE!");
         printLog3("ERRO: CONTRIBUICAO",nomeContribuicao," NAO EXISTE!");
     }
 
@@ -135,7 +136,6 @@ void ImprimeTextos(ListaContribuicoes *listaContribuicoes, char *nomePagina, FIL
                 fclose(arquivo);
             }else
             {
-                printf("ERRO: O ARQUIVO DA CONTRIBUICAO %s NAO FOI ENCONTRADO\n", contribuicao->nomeContribuicao); 
                 printLog3("ERRO: O ARQUIVO DA CONTRIBUICAO",contribuicao->nomeContribuicao,"NAO FOI ENCONTRADO!"); 
             }
         }
@@ -206,6 +206,7 @@ void RetiraContribuicoesPorEditor(Editor *editor, ListaContribuicoes *listaContr
                 aux2 = aux;
                 aux = aux->Prox;
                 free(aux2->nomeContribuicao);
+                free(aux2->nomePagina);
                 free(aux2);
                 continue;
             }else{
@@ -213,6 +214,7 @@ void RetiraContribuicoesPorEditor(Editor *editor, ListaContribuicoes *listaContr
                 aux2 = aux;
                 aux = aux->Prox;
                 free(aux2->nomeContribuicao);
+                free(aux2->nomePagina);
                 free(aux2);
                 continue;
             }

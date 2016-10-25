@@ -34,7 +34,6 @@ ListaEditores* InsereEditor(char *nomeEditor, ListaEditores *lista)
     {
         if (strcmp(lista->Primeiro->nomeEditor, nomeEditor) == 0)
         {
-            printf("ERRO: EDITOR JA EXISTE!\n");
             printLog3("ERRO: EDITOR",nomeEditor,"JA EXISTE");
             return lista;
         }
@@ -54,7 +53,6 @@ ListaEditores* InsereEditor(char *nomeEditor, ListaEditores *lista)
         
         if (aux != NULL)
         {
-            printf("ERRO: EDITOR JA EXISTE!\n");
             printLog3("ERRO: EDITOR",nomeEditor,"JA EXISTE");
             return lista;
         }
@@ -97,7 +95,6 @@ ListaEditores* RetiraEditor(char *nomeEditor, ListaEditores *lista, ListaContrib
 
     //CASO O EDITOR NAO EXISTA
     if (atual == NULL){
-        printf("ERRO: EDITOR NAO EXISTE!\n");
         printLog3("ERRO: EDITOR",nomeEditor,"NAO EXISTE");
     }
 
@@ -161,7 +158,6 @@ Editor* RecuperaEditorPorNome(char *nome, ListaEditores *lista)
     
     if (aux == NULL)
     {
-        printf("ERRO: EDITOR NAO EXISTE!\n");
         printLog3("ERRO: EDITOR",nome,"NAO EXISTE");
     }
     return aux;

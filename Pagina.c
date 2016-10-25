@@ -31,8 +31,7 @@ ListaPaginas* InserePagina(char *nomePagina, char *nomeArquivo, ListaPaginas *li
 {
     if (CheckExistencia(nomePagina, lista))
     {
-        printf("Pagina ja existe\n");
-        printLog3("Pagina", nomePagina, "ja existe");
+        printLog3("ERRO:PAGINA", nomePagina, "JA EXISTE");
         
         return lista;
     }
@@ -60,7 +59,6 @@ ListaPaginas* InserePagina(char *nomePagina, char *nomeArquivo, ListaPaginas *li
         lista->Primeiro = novaPagina;
     }
 	
-    //printLog("Pagina", nomePagina, "inserida");
     return lista;
 }
 
@@ -82,8 +80,7 @@ ListaPaginas* RetiraPagina(char *nomePagina, ListaPaginas *lista, ListaLinks *li
     //CASO A PAGINA NAO EXISTA
     if (atual == NULL)
     {
-        printf("ERRO: não existe a pagina %s\n",nomePagina);
-        printLog2("ERRO: não existe a pagina",nomePagina);
+        printLog2("ERRO: NAO EXISTE A PAGINA",nomePagina);
         return lista;
     }
 
@@ -135,11 +132,9 @@ int CheckExistencia(char *nomePagina, ListaPaginas *listaPaginas)
 
 void ImprimePagina(char *nomePagina, ListaPaginas *listaP, ListaEditores *listaE, ListaContribuicoes *listaC, ListaLinks *listaL)
 {
-    printf("Imprime Pagina\n");
-    
     if (CheckExistencia(nomePagina, listaP) == 0)
     {
-        printf("Pagina requisitada (%s) nao existe!\n", nomePagina);
+        printLog3("ERRO: A PAGINA",nomePagina,"NAO EXISTE");
         return;
     }
     
@@ -147,18 +142,18 @@ void ImprimePagina(char *nomePagina, ListaPaginas *listaP, ListaEditores *listaE
     
     FILE *file = fopen(pagina->nomeArquivo, "w");
     
-    if (file)
-        printf("Arquivo criado\n");
+    if (file){
+        fprintf(file, "%s\n\n", nomePagina);
+        fprintf(file, "--> Historico de contribuicoes\n");
     
-    fprintf(file, "%s\n\n", nomePagina);
-    fprintf(file, "--> Historico de contribuicoes\n");
+        ImprimeHistorico(listaC, nomePagina, file);
+        ImprimeLinks(listaL, nomePagina, file);
+        ImprimeTextos(listaC, nomePagina, file);
     
-    ImprimeHistorico(listaC, nomePagina, file);
-    ImprimeLinks(listaL, nomePagina, file);
-    ImprimeTextos(listaC, nomePagina, file);
-    
-    fclose(file);
-    
+        fclose(file);
+    }else{
+        printLog2("ERRO AO CRIAR O ARQUIVO:",nomePagina);
+    }
     return;
 }
 
@@ -199,6 +194,11 @@ char* RecuperaArquivoPagina(Pagina *pagina)
 void ImprimeWiked(ListaPaginas *listaP, ListaEditores *listaE, ListaContribuicoes *listaC, ListaLinks *listaL)
 {
     FILE *file = fopen("wiked.txt", "w");
+    
+    if(!file){
+        printLog2("ERRO AO ABRIR O ARQUIVO:","'wiked.txt'");
+        return;
+    }
     
     Pagina *pagina = listaP->Primeiro;
     
