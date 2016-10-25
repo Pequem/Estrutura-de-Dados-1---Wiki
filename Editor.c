@@ -6,42 +6,37 @@
 #include "Contribuicao.h"
 #include "Log.h"
 
-struct editor
-{
+struct editor {
     char *nomeEditor;
     Editor *Prox;
 };
 
-struct listaEditores
-{
+struct listaEditores {
     Editor *Primeiro;
     Editor *Ultimo;
 };
 
-ListaEditores* InicializaListaEditores()
-{
-    ListaEditores *lista = (ListaEditores*)malloc(sizeof(ListaEditores));
+ListaEditores* InicializaListaEditores() {
+    ListaEditores *lista = (ListaEditores*) malloc(sizeof (ListaEditores));
     lista->Primeiro = lista->Ultimo = NULL;
 
     return lista;
 }
 
-ListaEditores* InsereEditor(char *nomeEditor, ListaEditores *lista)
-{
+ListaEditores* InsereEditor(char *nomeEditor, ListaEditores *lista) {
     Editor *aux;
 
-    if(lista->Primeiro != NULL)
-    {
-        if (strcmp(lista->Primeiro->nomeEditor, nomeEditor) == 0)
-        {
-            printLog3("ERRO: EDITOR",nomeEditor,"JA EXISTE");
+
+    //Verifica se o editor já existe
+    if (lista->Primeiro != NULL) {
+        if (strcmp(lista->Primeiro->nomeEditor, nomeEditor) == 0) {
+            printLog3("ERRO: EDITOR", nomeEditor, "JA EXISTE");
             return lista;
         }
 
         aux = lista->Primeiro;
 
-        for (;;)
-        {
+        for (;;) {
             aux = aux->Prox;
 
             if (aux == NULL)
@@ -50,27 +45,25 @@ ListaEditores* InsereEditor(char *nomeEditor, ListaEditores *lista)
             if (strcmp(aux->nomeEditor, nomeEditor) == 0)
                 break;
         }
-        
-        if (aux != NULL)
-        {
-            printLog3("ERRO: EDITOR",nomeEditor,"JA EXISTE");
+
+        if (aux != NULL) {
+            printLog3("ERRO: EDITOR", nomeEditor, "JA EXISTE");
             return lista;
         }
     }
-    
-    Editor *novoEditor = (Editor*)malloc(sizeof(Editor));
+
+    Editor *novoEditor = (Editor*) malloc(sizeof (Editor));
     novoEditor->Prox = NULL;
 
-    novoEditor->nomeEditor = (char*)malloc(sizeof(char)*(strlen(nomeEditor) + 1));
+    novoEditor->nomeEditor = (char*) malloc(sizeof (char)*(strlen(nomeEditor) + 1));
     strcpy(novoEditor->nomeEditor, nomeEditor);
 
     //SE A LISTA ESTIVER VAZIA
     if (lista->Primeiro == NULL)
         lista->Primeiro = novoEditor;
 
-    //SE A LISTA JA TIVER ELEMENTOS
-    else
-    {
+        //SE A LISTA JA TIVER ELEMENTOS
+    else {
         novoEditor->Prox = lista->Primeiro;
         lista->Primeiro = novoEditor;
     }
@@ -78,14 +71,12 @@ ListaEditores* InsereEditor(char *nomeEditor, ListaEditores *lista)
     return lista;
 }
 
-ListaEditores* RetiraEditor(char *nomeEditor, ListaEditores *lista, ListaContribuicoes *listaContribuicoes)
-{
+ListaEditores* RetiraEditor(char *nomeEditor, ListaEditores *lista, ListaContribuicoes *listaContribuicoes) {
     Editor *atual = lista->Primeiro;
     Editor *anterior = lista->Primeiro;
 
     //PROCURANDO EDITOR A SER RETIRADO
-    while (atual != NULL)
-    {
+    while (atual != NULL) {
         if (strcmp(atual->nomeEditor, nomeEditor) == 0)
             break;
 
@@ -94,26 +85,22 @@ ListaEditores* RetiraEditor(char *nomeEditor, ListaEditores *lista, ListaContrib
     }
 
     //CASO O EDITOR NAO EXISTA
-    if (atual == NULL){
-        printLog3("ERRO: EDITOR",nomeEditor,"NAO EXISTE");
+    if (atual == NULL) {
+        printLog3("ERRO: EDITOR", nomeEditor, "NAO EXISTE");
     }
-
-    //EDITOR A SER RETIRADO EH O PRIMEIRO DA LISTA
-    else if (atual == lista->Primeiro)
-    {
+        //EDITOR A SER RETIRADO EH O PRIMEIRO DA LISTA
+    else if (atual == lista->Primeiro) {
         lista->Primeiro = atual->Prox;
         RetiraContribuicoesPorEditor(atual, listaContribuicoes);
-        
+
         free(atual->nomeEditor);
         free(atual);
     }
-
-    //EDITOR A SER RETIRADO ESTA EM OUTRA POSICAO DA LISTA
-    else
-    {
+        //EDITOR A SER RETIRADO ESTA EM OUTRA POSICAO DA LISTA
+    else {
         anterior->Prox = atual->Prox;
         RetiraContribuicoesPorEditor(atual, listaContribuicoes);
-        
+
         free(atual->nomeEditor);
         free(atual);
     }
@@ -121,20 +108,17 @@ ListaEditores* RetiraEditor(char *nomeEditor, ListaEditores *lista, ListaContrib
     return lista;
 }
 
-char* RecuperaNomeEditor(Editor *editor)
-{
-    return(editor->nomeEditor);
+char* RecuperaNomeEditor(Editor *editor) {
+    return (editor->nomeEditor);
 }
 
-int RecuperaTamNomeEditor(Editor *editor)
-{
+int RecuperaTamNomeEditor(Editor *editor) {
     int tam = strlen(editor->nomeEditor);
-    
+
     return tam;
 }
 
-Editor* RecuperaEditorPorNome(char *nome, ListaEditores *lista)
-{
+Editor* RecuperaEditorPorNome(char *nome, ListaEditores *lista) {
     Editor *aux;
 
     if (lista->Primeiro == NULL)
@@ -145,32 +129,28 @@ Editor* RecuperaEditorPorNome(char *nome, ListaEditores *lista)
 
     aux = lista->Primeiro;
 
-    for (;;)
-    {
+    for (;;) {
         aux = aux->Prox;
-        
+
         if (aux == NULL)
             break;
-        
+
         if (strcmp(aux->nomeEditor, nome) == 0)
             break;
     }
-    
-    if (aux == NULL)
-    {
-        printLog3("ERRO: EDITOR",nome,"NAO EXISTE");
+
+    if (aux == NULL) {
+        printLog3("ERRO: EDITOR", nome, "NAO EXISTE");
     }
     return aux;
 }
 
-void FimEditores(ListaEditores *lista)
-{
+void FimEditores(ListaEditores *lista) {
     Editor *aux = lista->Primeiro;
     Editor *aux1;
 
-    if(aux != NULL){
-        while (aux != NULL)
-        {
+    if (aux != NULL) {
+        while (aux != NULL) {
             aux1 = aux;
 
             free(aux1->nomeEditor);
