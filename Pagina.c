@@ -223,16 +223,18 @@ void FimPaginas(ListaPaginas *lista)
 {
     Pagina *aux1, *aux = lista->Primeiro;
 
-    while (aux != NULL)
-    {
-        aux1 = aux;
+    if(aux != NULL){
+        while (aux != NULL)
+        {
+            aux1 = aux;
 
-        free(aux1->nomeArquivo);
-        free(aux1->nomePagina);
+            free(aux1->nomeArquivo);
+            free(aux1->nomePagina);
 
-        aux = aux->Prox;
+            aux = aux->Prox;
 
-        free(aux1);
+            free(aux1);
+        }
     }
 
     free(lista);

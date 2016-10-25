@@ -30,27 +30,31 @@ ListaLinks *InicializaListaLinks()
 
 void InsereLink(ListaLinks * lista, ListaPaginas *listaPaginas, char *deNome, char *paraNome)
 {
-    Link *l = (Link*)malloc(sizeof(Link));
+    
 
-    l->de = RecuperaPaginaPorNome(listaPaginas, deNome);;
-    l->para = RecuperaPaginaPorNome(listaPaginas, paraNome);
-    l->Prox = NULL;
+    Pagina *de = RecuperaPaginaPorNome(listaPaginas, deNome);;
+    Pagina *para = RecuperaPaginaPorNome(listaPaginas, paraNome);
 
-    if (l->de == NULL)
+    if (de == NULL)
     {
         printLog3("ERRO: A PAGINA",deNome,"NAO EXISTE");
         return;
     }
     
-    if(l->para == NULL){
+    if(para == NULL){
         printLog3("ERRO: A PAGINA",paraNome,"NAO EXISTE");
         return;
     }
     
-    if (l->de == l->para){
+    if (de == para){
         printLog2("ERRO","UMA PAGINA NAO PODE APONTAR PARA ELA MESMA");
         return;
     }
+    
+    Link *l = (Link*)malloc(sizeof(Link));
+    l->de = de;
+    l->para = para;
+    l->Prox = NULL;
     
     if(lista->Primeiro != NULL){
         Link *aux;
@@ -141,12 +145,12 @@ void RetiraLink(ListaLinks *listaLinks,ListaPaginas *listaPaginas, char *deNome,
     
     do
     {
-        if(aux->Prox == NULL) break;
-        if((aux->de == de) && (aux->para == para)) break;
         aux = aux->Prox;
+        if(aux == NULL) break;
+        if((aux->de == de) && (aux->para == para)) break;
     } while (1);
 	
-    if (aux->Prox != NULL)
+    if (aux != NULL)
     {
         RemoverLink(listaLinks, aux);
     }
@@ -231,12 +235,14 @@ void FimLinks(ListaLinks *lista)
     Link *aux = lista->Primeiro;
     Link *aux1;
 
-    while (aux != NULL)
-    {
-        aux1 = aux;
-        aux = aux->Prox;
+    if(aux != NULL){
+        while (aux != NULL)
+        {
+            aux1 = aux;
+            aux = aux->Prox;
 
-        free(aux1);
+            free(aux1);
+        }
     }
 
     free(lista);

@@ -168,15 +168,17 @@ void FimEditores(ListaEditores *lista)
     Editor *aux = lista->Primeiro;
     Editor *aux1;
 
-    while (aux != NULL)
-    {
-        aux1 = aux;
+    if(aux != NULL){
+        while (aux != NULL)
+        {
+            aux1 = aux;
 
-        free(aux1->nomeEditor);
+            free(aux1->nomeEditor);
 
-        aux = aux->Prox;
+            aux = aux->Prox;
 
-        free(aux1);
+            free(aux1);
+        }
     }
 
     free(lista);

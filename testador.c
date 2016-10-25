@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
     	printf("Arquivo nao existe!\n");
     	return 2;
     }
+         
     
     ListaPaginas* listaPaginas = InicializaListaPaginas();
     ListaEditores* listaEditores = InicializaListaEditores();

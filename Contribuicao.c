@@ -259,15 +259,16 @@ void FimContribuicoes(ListaContribuicoes * lista)
 	
     aux = lista->Primeiro;
 
-    do
-    {
-        prox = aux->Prox;
-		
-        free(aux->nomeContribuicao);
-        free(aux->nomePagina);
-        free(aux);
-        aux = prox;
-    }while (prox != NULL);
+    if(aux != NULL){
+        do
+        {
+            prox = aux->Prox;
 
+            free(aux->nomeContribuicao);
+            free(aux->nomePagina);
+            free(aux);
+            aux = prox;
+        }while (prox != NULL);
+    }
     free(lista);
 }
