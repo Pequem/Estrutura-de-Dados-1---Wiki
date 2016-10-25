@@ -10,6 +10,7 @@
 struct link {
     Pagina *de;
     Pagina *para;
+    int excluido;
     Link *Prox;
 };
 
@@ -46,33 +47,35 @@ void InsereLink(ListaLinks * lista, ListaPaginas *listaPaginas, char *deNome, ch
         return;
     }
 
-    Link *l = (Link*) malloc(sizeof (Link));
-    l->de = de;
-    l->para = para;
-    l->Prox = NULL;
 
     if (lista->Primeiro != NULL) {
         Link *aux;
 
         aux = lista->Primeiro;
 
-        if (aux->de == l->de) {
-            if (aux->para == l->para) {
+        if (aux->de == de) {
+            if (aux->para == para) {
                 printLog4("ERRO: JA EXISTE O LINK DE", deNome, "PARA", paraNome);
                 return;
             }
         }
         for (;;) {
             if (aux == NULL) break;
-            if (aux->de == l->de) {
-                if (aux->para == l->para) {
+            if (aux->de == de) {
+                if (aux->para == para) {
                     printLog4("ERRO: JA EXISTE O LINK DE", deNome, "PARA", paraNome);
                     return;
                 }
             }
             aux = aux->Prox;
         }
-    }
+    }    
+    
+    Link *l = (Link*) malloc(sizeof (Link));
+    l->de = de;
+    l->para = para;
+    l->Prox = NULL;
+    l->excluido = 0;
 
     if (lista->Primeiro == NULL) {
         lista->Primeiro = lista->Ultimo = l;
@@ -128,7 +131,7 @@ void RetiraLink(ListaLinks *listaLinks, ListaPaginas *listaPaginas, char *deNome
     aux = listaLinks->Primeiro;
 
     if ((aux->de == de) && (aux->para == para)) {
-        RemoverLink(listaLinks, aux);
+        aux->excluido = 1;
         return;
     }
 
@@ -139,7 +142,7 @@ void RetiraLink(ListaLinks *listaLinks, ListaPaginas *listaPaginas, char *deNome
     } while (1);
 
     if (aux != NULL) {
-        RemoverLink(listaLinks, aux);
+        aux->excluido = 1;
     } else {
         printLog4("ERRO: NAO EXISTE LINK DE", deNome, "PARA", paraNome);
     }
@@ -153,8 +156,13 @@ void ImprimeLinks(ListaLinks *listaLinks, char *nomePagina, FILE *file) {
     fprintf(file, "--> Links\n");
 
     while (link != NULL) {
-        if (strcmp(RecuperaNomePagina(link->de), nomePagina) == 0)
-            fprintf(file, "%s %s\n", RecuperaNomePagina(link->para), RecuperaArquivoPagina(link->para));
+        if (strcmp(RecuperaNomePagina(link->de), nomePagina) == 0){
+            if(link->excluido == 0){
+                fprintf(file, "%s %s\n", RecuperaNomePagina(link->para), RecuperaArquivoPagina(link->para));
+            }else{
+                fprintf(file, "%s %s(Excluido)\n", RecuperaNomePagina(link->para), RecuperaArquivoPagina(link->para));
+            }
+        }
 
         link = link->Prox;
     }
@@ -181,8 +189,10 @@ void CheckLink(ListaLinks * listaLinks, ListaPaginas * listaPaginas, char * nome
 
     while (aux != NULL) {
         if ((aux->de == de) && (aux->para == para)) {
-            printLog4("HA CAMINHO DA PAGINA ", nomeDe, " PARA ", nomePara);
-            return;
+            if(aux->excluido == 0){
+                printLog4("HA CAMINHO DA PAGINA ", nomeDe, " PARA ", nomePara);
+                return;
+            }
         }
 
         aux = aux->Prox;
